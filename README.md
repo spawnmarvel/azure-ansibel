@@ -52,6 +52,32 @@ Managed node
 Inventory
 * A list of managed nodes that are logically organized. You create an inventory on the control node to describe host deployments to Ansible.
 
+Playbooks
+* They contain Plays (which are the basic unit of Ansible execution).
+
+Play
+* The Play contains variables, roles and an ordered lists of tasks and can be run repeatedly.
+
+Roles
+* A limited distribution of reusable Ansible content (tasks, handlers, variables, plugins, templates and files) for use inside of a Play. 
+
+Tasks
+* The definition of an ‘action’ to be applied to the managed host. Tasks must always be contained in a Play, directly or indirectly (Role, or imported/included task list file).
+
+Handlers
+* A special form of a Task, that only executes when notified by a previous task which resulted in a ‘changed’ status.
+
+Modules
+* The code or binaries that Ansible copies to and executes on each managed node (when needed) to accomplish the action defined in each Task.
+
+Plugins
+* Pieces of code that expand Ansible’s core capabilities.
+
+Collections
+* A format in which Ansible content is distributed that can contain playbooks, roles, modules, and plugins. You can install and use collections through Ansible Galaxy
+
+https://docs.ansible.com/ansible/latest/network/getting_started/basic_concepts.html#
+
 https://docs.ansible.com/ansible/latest/getting_started/index.html
 
 # 4 Ansible module and version matrix
@@ -68,6 +94,15 @@ https://learn.microsoft.com/en-us/azure/developer/ansible/module-version-matrix
 
 Using Ansible with Azure
 
-
 https://learn.microsoft.com/en-us/azure/developer/ansible/overview
+
+## Installing ansible
+
+Controll node
+* For your control node (the machine that runs Ansible), you can use nearly any UNIX-like machine with Python 3.9 or newer installed. 
+
+
+https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html#installing-ansible
+
+
 
