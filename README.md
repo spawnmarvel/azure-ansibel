@@ -114,8 +114,12 @@ https://learn.microsoft.com/en-us/azure/developer/ansible/overview
 
 ## Commands
 
-* ansible-playbook create_rg.yml
+```bash
+# No params
+ansible-playbook run_cmd.yml
 
+
+```
 
 
 

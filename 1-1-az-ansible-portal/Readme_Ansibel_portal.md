@@ -62,7 +62,7 @@ Run the playbook using ansible-playbook. Replace the placeholders with the name 
 ansible-playbook create_rg.yml --extra-vars "name=Rg-ansible-101 location=uksouth"
 
 # This worked
-ansible-playbook create_rg.yml
+ansible-playbook run_cmd.yml
 
 ```
 It created two txt files
