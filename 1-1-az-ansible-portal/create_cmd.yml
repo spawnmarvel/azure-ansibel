@@ -1,0 +1,7 @@
+- hosts: localhost
+  connection: local
+  tasks:
+    - name: Run command on localhost
+      command: touch test.txt
+    - name: Run command on localhost
+      command: touch test1.txt
