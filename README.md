@@ -5,7 +5,7 @@ Testing and learning Ansibel with Azure
 
 Working in IT, you're likely doing the same tasks over and over. What if you could solve problems once and then automate your solutions going forward?
 
-# 1.1 Learning Ansible basics
+## 1.1 Learning Ansible basics
 
 Ansible is an open source IT automation engine that automates provisioning, configuration management, application deployment, orchestration, and many other IT processes.
 
@@ -33,8 +33,28 @@ Collections
 
 https://www.redhat.com/en/topics/automation/learning-ansible-tutorial
 
+## 2 Ansible galaxy
 
-# 2 Ansibel on Azure documentation
+Ansible Galaxy refers to the Galaxy website, a free site for finding, downloading, and sharing community developed collections and roles
+
+https://galaxy.ansible.com/ui/
+
+## 3 Getting started with Ansible
+
+Ansible automates the management of remote systems and controls their desired state. A basic Ansible environment has three main components:
+
+Control node
+* A system on which Ansible is installed. You run Ansible commands such as ansible or ansible-inventory on a control node.
+
+Managed node
+* A remote system, or host, that Ansible controls.
+
+Inventory
+* A list of managed nodes that are logically organized. You create an inventory on the control node to describe host deployments to Ansible.
+
+https://docs.ansible.com/ansible/latest/getting_started/index.html
+
+## 4 Ansibel on Azure documentation
 
 Using Ansible with Azure
 
