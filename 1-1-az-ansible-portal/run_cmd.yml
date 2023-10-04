@@ -1,3 +1,5 @@
+# Every yml file starte with ---
+---
 - hosts: localhost
   connection: local
   tasks:
