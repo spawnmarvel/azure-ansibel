@@ -112,5 +112,10 @@ Using Ansible with Azure
 
 https://learn.microsoft.com/en-us/azure/developer/ansible/overview
 
+## Commands
+
+* ansible-playbook create_rg.yml
+
+
 
 
