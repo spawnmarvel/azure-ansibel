@@ -80,7 +80,23 @@ https://docs.ansible.com/ansible/latest/network/getting_started/basic_concepts.h
 
 https://docs.ansible.com/ansible/latest/getting_started/index.html
 
-# 4 Ansible module and version matrix
+## 4 Installing ansible
+
+Controll node
+* For your control node (the machine that runs Ansible), you can use nearly any UNIX-like machine with Python 3.9 or newer installed. 
+
+
+https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html#installing-ansible
+
+## 5 How To Install and Configure Ansible on Ubuntu 20.04
+
+* One Ansible Control Node
+* A non-root user with sudo privileges.
+* An SSH keypair associated with this user
+
+https://www.digitalocean.com/community/tutorials/how-to-install-and-configure-ansible-on-ubuntu-20-04
+
+## 6 Ansible module and version matrix
 
 Ansible modules for Azure
 
@@ -90,23 +106,11 @@ Ansible modules for Azure
 
 https://learn.microsoft.com/en-us/azure/developer/ansible/module-version-matrix
 
-## 5 Ansibel on Azure documentation
+## 7 Ansibel on Azure documentation
 
 Using Ansible with Azure
 
 https://learn.microsoft.com/en-us/azure/developer/ansible/overview
-
-## Installing ansible
-
-Controll node
-* For your control node (the machine that runs Ansible), you can use nearly any UNIX-like machine with Python 3.9 or newer installed. 
-
-
-https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html#installing-ansible
-
-## How To Install and Configure Ansible on Ubuntu 20.04
-
-https://www.digitalocean.com/community/tutorials/how-to-install-and-configure-ansible-on-ubuntu-20-04
 
 
 
