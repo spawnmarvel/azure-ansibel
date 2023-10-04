@@ -31,6 +31,7 @@ nano create_rg.yml
 ```
 
 ```yaml
+# This did not work, MS default
 ---
 - hosts: localhost
   connection: local
@@ -43,7 +44,30 @@ nano create_rg.yml
     - debug:
         var: rg
 
+# Something with indentation I guess.
+
+# This worked
+# Comment
+- hosts: localhost
+  connection: local
+  tasks:
+    - name: Run command on localhost
+      command: touch test.txt
+    - name: Run command on localhost
+      command: touch test1.txt
 ```
+Run the playbook using ansible-playbook. Replace the placeholders with the name and location of the resource group to be created.
+
+```bash
+ansible-playbook create_rg.yml --extra-vars "name=Rg-ansible-101 location=uksouth"
+
+# This worked
+ansible-playbook create_rg.yml
+
+```
+It created two txt files
+
+
 
 https://learn.microsoft.com/en-us/azure/developer/ansible/getting-started-cloud-shell?tabs=ansible#next-steps
 
