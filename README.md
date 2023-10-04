@@ -54,7 +54,17 @@ Inventory
 
 https://docs.ansible.com/ansible/latest/getting_started/index.html
 
-## 4 Ansibel on Azure documentation
+# 4 Ansible module and version matrix
+
+Ansible modules for Azure
+
+* Ansible 2.4
+* Ansible 2.10 with azure.azcollection has all
+
+
+https://learn.microsoft.com/en-us/azure/developer/ansible/module-version-matrix
+
+## 5 Ansibel on Azure documentation
 
 Using Ansible with Azure
 
