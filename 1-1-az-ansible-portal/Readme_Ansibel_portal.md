@@ -67,7 +67,7 @@ ansible-playbook create_rg.yml
 ```
 It created two txt files
 
-
+![Result 101](https://github.com/spawnmarvel/azure-ansibel/blob/main/images/101.jpg)
 
 https://learn.microsoft.com/en-us/azure/developer/ansible/getting-started-cloud-shell?tabs=ansible#next-steps
 
