@@ -32,6 +32,8 @@ nano create_rg.yml
 
 ```yaml
 # This did not work, MS default
+
+# Every yml file starte with ---
 ---
 - hosts: localhost
   connection: local
@@ -47,7 +49,8 @@ nano create_rg.yml
 # Something with indentation I guess.
 
 # This worked
-# Comment
+
+# Every yml file starte with ---
 - hosts: localhost
   connection: local
   tasks:
