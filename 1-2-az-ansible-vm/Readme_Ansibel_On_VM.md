@@ -2,98 +2,25 @@
 
 ## Steps
 
-* Create a virtual machine
-* Connect to your virtual machine via SSH
-* * User
 
-```bash
-sudo apt update -y
-
-sudo apt upgrade -y
-
-python3 --version
-# Python 3.10.12
-
-sudo apt install python3-pip -y
-pip3 --version
-# pip 22.0.2 from /usr/lib/python3/dist-packages/pip (python 3.10)
-
-python3
-#Python 3.10.12 (main, Jun 11 2023, 05:26:28) [GCC 11.4.0] on linux
-#Type "help", "copyright", "credits" or "license" for more information.
-# exit()
-
-# Upgrade pip3.
-sudo pip3 install --upgrade pip
-
-pip3 --version
-# pip 23.2.1 from /usr/local/lib/python3.10/dist-packages/pip (python 3.10)
-
-which pip3
-# /usr/local/bin/pip3
-
-which python3
-# /usr/bin/python3
-
-# # Install Ansible.
-pip3 install "ansible==2.9.17"
-# Successfully installed ansible-2.9.17
-
-3 # Install Ansible azure_rm module for interacting with Azure.
-pip3 install ansible[azure]
-
-
-
-```
+* Create a resource group
+* Create a Ubuntu virtual machine
 * Install Ansible on the virtual machine
-* *  Ansible 2.9 with the azure_rm module
+* Connect to the virtual machine via SSH
+* Configure Ansible on the virtual machine
 
-* Create Azure credentials
+https://learn.microsoft.com/en-us/azure/developer/ansible/install-on-linux-vm?tabs=azure-cli#env-credentials
 
-
-Create an Azure service principal with Azure PowerShell (SPN)
-https://follow-e-lo.com/2023/04/25/create-an-azure-service-principal-with-azure-powershell/
-
-https://docs.ansible.com/ansible/latest/scenario_guides/guide_azure.html
-
-Option 2: Define Ansible environment variables
-
-On the host virtual machine, export the service principal values to configure your Ansible credentials.
-
-```bash
-export AZURE_SUBSCRIPTION_ID=<subscription_id>
-export AZURE_CLIENT_ID=
-export AZURE_SECRET=<service_principal_password>
-export AZURE_TENANT=<service_principal_tenant_id>
-
-```
-
+* Rg
+* Vm Ubuntu 22.04 2 CPU, 4 RAM 0.0044 h?
+* Install Ansible
+* Create SPN and grant RBACK (Create Azure credentials)
+* Option 2: Define Ansible environment variables
 * Test Ansible installation
 
 ```bash
-ansible localhost -m azure_rm_resourcegroup -a "name=ansible-test location=uksouth"
-# Command 'ansible' not found, but can be installed with:
-#sudo apt install ansible       # version 2.10.7+merged+base+2.10.8+dfsg-1, or
-# sudo apt install ansible-core  # version 2.12.0-1ubuntu0.1
-sudo apt install ansible-core
 
-ansible --version
-Traceback (most recent call last):
-  File "/usr/bin/ansible", line 66, in <module>
-    from ansible.utils.display import Display, initialize_locale
-ImportError: cannot import name 'initialize_locale' from 'ansible.utils.display' (/home/imsdal/.local/lib/python3.10/site-packages/ansible/utils/display.py)
-
-
-```
-
-https://learn.microsoft.com/en-us/azure/developer/ansible/install-on-linux-vm?tabs=azure-cli
-
-
-Start fresh
-Ubuntu 22.04
-2 CPU, 4 RAM 0.0044 h?
-
-```bash
+ssh username@ip
 
 sudo apt update -y
 sudo apt upgrade -y
