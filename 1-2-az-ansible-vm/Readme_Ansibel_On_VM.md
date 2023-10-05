@@ -12,7 +12,7 @@
 https://learn.microsoft.com/en-us/azure/developer/ansible/install-on-linux-vm?tabs=azure-cli#env-credentials
 
 * Rg
-* Vm Ubuntu 22.04 2 CPU, 4 RAM 0.0044 h?
+* Vm Ubuntu 22.04 2 CPU, 4 RAM, 730 h, $34.46
 * Install Ansible
 * Create SPN and grant RBACK (Create Azure credentials)
 * Option 2: Define Ansible environment variables
