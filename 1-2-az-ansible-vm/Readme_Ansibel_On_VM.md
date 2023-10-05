@@ -18,6 +18,8 @@ https://learn.microsoft.com/en-us/azure/developer/ansible/install-on-linux-vm?ta
 * Option 2: Define Ansible environment variables
 * Test Ansible installation
 
+
+## Install Ansible
 ```bash
 
 ssh username@ip
@@ -125,7 +127,7 @@ ansible-galaxy collection install azure.azcollection
 pip3 install -r ~/.ansible/collections/ansible_collections/azure/azcollection/requirements-azure.txt
 
 ```
-Make SPN
+### Make SPN
 ```ps1
 # export keys? Yes
 
@@ -144,7 +146,7 @@ New-AzRoleAssignment -ApplicationId $sp.Id -RoleDefinitionName 'Contributor' #  
 $sp.Id  # ps1 
 
 ```
-Export vars and run create
+### Export vars and run create
 
 ```bash
 
@@ -184,6 +186,7 @@ ansible localhost -m azure.azcollection.azure_rm_resourcegroup -a "name=Rg-test-
 
 ![Result 102](https://github.com/spawnmarvel/azure-ansibel/blob/main/images/102.jpg)
 
+### Login and out
 
 ```bash
 # Log out and in
@@ -201,7 +204,7 @@ export AZURE_TENANT=Default Directory | Overview
 ansible localhost -m azure.azcollection.azure_rm_resourcegroup -a "name=Rg-test-iac457 location=uksouth"
 
 ```
-Result
+### Result
 
 ```log
 ansible localhost -m azure.azcollection.azure_rm_resourcegroup -a "name=Rg-test-iac457 location=uksouth"
