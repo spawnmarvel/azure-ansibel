@@ -72,7 +72,9 @@ az vm image list --location 'uksouth' -p Canonical --all -o table
 # Run it
 ansible-playbook main.yml
 
-TASK [Create VM] *********************************************************************************************************************************************************************************************************************************************fatal: [localhost]: FAILED! => {"changed": false, "msg": "Error fetching image Canonical UbuntuServer 22_04-lts-gen2 - (NotFound) Artifact: VMImage was not found.\nCode: NotFound\nMessage: Artifact: VMImage was not found."}
+TASK [Create VM] 
+
+fatal: [localhost]: FAILED! => {"changed": false, "msg": "Error fetching image Canonical UbuntuServer 22_04-lts-gen2 - (NotFound) Artifact: VMImage was not found.\nCode: NotFound\nMessage: Artifact: VMImage was not found."}
 
 ```
 
