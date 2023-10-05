@@ -183,10 +183,27 @@ export AZURE_CLIENT_ID=Default directory Application (client) ID # This was corr
 ansible localhost -m azure.azcollection.azure_rm_resourcegroup -a "name=Rg-test-iac456 location=uksouth"
 
 ```
+### Result
 
-![Result 102](https://github.com/spawnmarvel/azure-ansibel/blob/main/images/102.jpg)
+```log
+ ansible localhost -m azure.azcollection.azure_rm_resourcegroup -a "name=Rg-test-iac456 location=uksouth"
+[WARNING]: No inventory was parsed, only implicit localhost is available
+localhost | CHANGED => {
+    "changed": true,
+    "contains_resources": false,
+    "state": {
+        "id": "/subscriptions/A-LONG-STRING-YES-IT-IS/resourceGroups/Rg-test-iac457",
+        "location": "uksouth",
+        "name": "Rg-test-iac457",
+        "provisioning_state": "Succeeded",
+        "tags": {
+            "Hello": "World"
+        }
+    }
+}
+```
 
-### Login and out
+### Login and out of VM
 
 ```bash
 # Log out and in
