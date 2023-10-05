@@ -12,8 +12,9 @@
 https://learn.microsoft.com/en-us/azure/developer/ansible/install-on-linux-vm?tabs=azure-cli#env-credentials
 
 * Rg
+* ![RG](https://github.com/spawnmarvel/azure-ansibel/blob/main/images/rg.jpg)
 * Vm Ubuntu 22.04 2 CPU, 4 RAM, 730 h, $34.46
-* * ![Node](https://github.com/spawnmarvel/azure-ansibel/blob/main/images/node.jpg)
+* ![Node](https://github.com/spawnmarvel/azure-ansibel/blob/main/images/node.jpg)
 * Install Ansible
 * Create SPN and grant RBACK (Create Azure credentials)
 * Option 2: Define Ansible environment variables
