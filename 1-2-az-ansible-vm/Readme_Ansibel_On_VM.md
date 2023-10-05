@@ -212,6 +212,7 @@ export AZURE_TENANT=Default Directory | Overview
 
 # Test install to Azure finally
 # Ansible 2.10 with azure.azcollection
+# Make a new rg
 ansible localhost -m azure.azcollection.azure_rm_resourcegroup -a "name=Rg-test-iac457 location=uksouth"
 
 ```
