@@ -132,7 +132,6 @@ https://www.tutorialspoint.com/ansible/ansible_troubleshooting.htm
 # No params
 ansible-playbook run_cmd.yml
 
-
 ```
 
 
