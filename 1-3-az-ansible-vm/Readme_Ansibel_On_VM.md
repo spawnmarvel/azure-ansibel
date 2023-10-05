@@ -191,6 +191,10 @@ pip3 install -r ~/.ansible/collections/ansible_collections/azure/azcollection/re
 #Ansible 2.10 with azure.azcollection
 ansible localhost -m azure.azcollection.azure_rm_resourcegroup -a "name=Rg-test-iac456 location=uksouth"
 
+
+```
+Make SPN
+```ps1
 # export keys? Yes
 
 # Without any other authentication parameters, password-based authentication is used and a random password created for you. If you want password-based authentication, this method is recommended.
@@ -201,8 +205,16 @@ $sp = New-AzADServicePrincipal -DisplayName VmCtrlNodeSPN # ps1
 
 $sp.PasswordCredentials.SecretText # ps1
 
+
+New-AzRoleAssignment -ApplicationId $sp.Id -RoleDefinitionName 'Contributor' #  -Scope can fine tune this to rg
+
 # Get ID
 $sp.Id  # ps1 
+
+```
+Export vars and run create
+
+```bash
 
 Option 2: Define Ansible environment variables
 On the host virtual machine, export the service principal values to configure your Ansible credentials.
@@ -223,12 +235,6 @@ ansible localhost -m azure.azcollection.azure_rm_resourcegroup -a "name=Rg-test-
 # Go to th SPN
 # SPN | App roles
 # To create cusom roles, your organization needs P1 or P2.....fack
-
-# Assign contributor to th SPN
-
-https://learn.microsoft.com/en-us/azure/developer/ansible/create-ansible-service-principal?tabs=azure-cli
-
-az role assignment create --assignee <appID>  --role Contributor --scope /subscriptions/<subscription_id>
 
 # Na same error
 # ClientSecretCredential.get_token failed: Authentication failed: AADSTS700016: Application with identifier
