@@ -112,6 +112,14 @@ Using Ansible with Azure
 
 https://learn.microsoft.com/en-us/azure/developer/ansible/overview
 
+## Tutorials point
+
+Common Playbook Issues
+* Quoting
+* Indentation, space not tabs
+
+https://www.tutorialspoint.com/ansible/ansible_troubleshooting.htm
+
 ## Commands
 
 ```bash
