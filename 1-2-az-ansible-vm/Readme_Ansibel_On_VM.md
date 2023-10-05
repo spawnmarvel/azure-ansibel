@@ -52,8 +52,9 @@ ansible-galaxy collection install azure.azcollection
 # sudo apt install ansible       # version 2.10.7+merged+base+2.10.8+dfsg-1, or
 # sudo apt install ansible-core  # version 2.12.0-1ubuntu0.1
 
-# No plugins, must install self
+
 sudo apt install ansible-core -y
+# No plugins, must install self, this is just the base
 
 ansible --version
 #ansible [core 2.12.0]
@@ -72,30 +73,27 @@ ansible-galaxy collection install azure.azcollection
 # ERROR! Unexpected Exception, this is probably a bug: CollectionDependencyProvider.find_matches() got an unexpected keyword argument 'identifier'
 # to see the full traceback, use -vvv
 
+# Fix this
+# https://github.com/ansible-collections/community.digitalocean/issues/132
 
 pip install -Iv 'resolvelib<0.6.0';
 
-https://github.com/ansible-collections/community.digitalocean/issues/132
-
-# sudo apt purge ansible-core -y
-
+# This works now
 ansible-galaxy collection install azure.azcollection
 # Installing 'azure.azcollection:1.18.1' to '/home/imsdal/.ansible/collections/ansible_collections/azure/azcollection'
 # azure.azcollection:1.18.1 was installed successfully
 
-
-ansible-galaxy collection list
-# Collection         Version
-# ------------------ -------
-# azure.azcollection 1.18.1
-
-# Ansible is the Package including several Community collections. Ansible base/ansible core is just the core application.
+# Remove core since it does not have modules
 
 sudo apt purge ansible-core -y
 
-# Yes, all plugins
+# Yes, we need all plugins
 sudo apt install ansible -y
 
+# It seems that this is already installled from previous step, so no need
+ansible-galaxy collection install azure.azcollection
+
+# Check version, must be no core
 ansible --version
 #ansible 2.10.8
 #  config file = None
@@ -103,6 +101,8 @@ ansible --version
 #  ansible python module location = /usr/lib/python3/dist-packages/ansible
 #  executable location = /usr/bin/ansible
 #  python version = 3.10.12 (main, Jun 11 2023, 05:26:28) [GCC 11.4.0]
+
+# View collections
 
 ansible-galaxy collection list
 # # /usr/lib/python3/dist-packages/ansible_collections
@@ -123,10 +123,6 @@ ansible-galaxy collection install azure.azcollection
 # Skipping 'azure.azcollection' as it is already installed
 
 pip3 install -r ~/.ansible/collections/ansible_collections/azure/azcollection/requirements-azure.txt
-
-#Ansible 2.10 with azure.azcollection
-ansible localhost -m azure.azcollection.azure_rm_resourcegroup -a "name=Rg-test-iac456 location=uksouth"
-
 
 ```
 Make SPN
@@ -177,12 +173,50 @@ ansible localhost -m azure.azcollection.azure_rm_resourcegroup -a "name=Rg-test-
 # This can happen if the application has not been installed by the administrator of the tenant or consented to by any user in the tenant. You may have sent your authentication request to the wrong tenant
 
 
-Option 2: Define Ansible environment variables
+# Option 2: Define Ansible environment variables
 export AZURE_CLIENT_ID=Default directory Application (client) ID # This was correct
+
+# Test install to Azure finally
+# Ansible 2.10 with azure.azcollection
+ansible localhost -m azure.azcollection.azure_rm_resourcegroup -a "name=Rg-test-iac456 location=uksouth"
 
 ```
 
 ![Result 102](https://github.com/spawnmarvel/azure-ansibel/blob/main/images/102.jpg)
 
 
+```bash
+# Log out and in
+ssh username@ip
 
+Option 2: Define Ansible environment variables
+On the host virtual machine, export the service principal values to configure your Ansible credentials.
+export AZURE_SUBSCRIPTION_ID=Subscription ID
+export AZURE_CLIENT_ID=Default directory Application (client) ID
+export AZURE_SECRET=$sp.PasswordCredentials.SecretText
+export AZURE_TENANT=Default Directory | Overview
+
+# Test install to Azure finally
+# Ansible 2.10 with azure.azcollection
+ansible localhost -m azure.azcollection.azure_rm_resourcegroup -a "name=Rg-test-iac457 location=uksouth"
+
+```
+Result
+
+```log
+ansible localhost -m azure.azcollection.azure_rm_resourcegroup -a "name=Rg-test-iac457 location=uksouth"
+[WARNING]: No inventory was parsed, only implicit localhost is available
+localhost | CHANGED => {
+    "changed": true,
+    "contains_resources": false,
+    "state": {
+        "id": "/subscriptions/A-LONG-STRING-YES-IT-IS/resourceGroups/Rg-test-iac457",
+        "location": "uksouth",
+        "name": "Rg-test-iac457",
+        "provisioning_state": "Succeeded",
+        "tags": {
+            "Hello": "World"
+        }
+    }
+}
+```
