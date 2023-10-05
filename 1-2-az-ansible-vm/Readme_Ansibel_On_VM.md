@@ -173,7 +173,7 @@ ansible localhost -m azure.azcollection.azure_rm_resourcegroup -a "name=Rg-test-
 export AZURE_CLIENT_ID=Default directory Application (client) ID # This was correct
 
 # Test install to Azure finally
-# Ansible 2.10 with azure.azcollection
+# ansible 2.10.8 with azure.azcollection
 ansible localhost -m azure.azcollection.azure_rm_resourcegroup -a "name=Rg-test-iac456 location=uksouth"
 
 ```
