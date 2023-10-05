@@ -129,19 +129,17 @@ ansible-galaxy collection install azure.azcollection
 pip3 install -r ~/.ansible/collections/ansible_collections/azure/azcollection/requirements-azure.txt
 
 ```
-### Make SPN
+### Make SPN with CLI or PS1
 ```ps1
 # export keys? Yes
 
 # Without any other authentication parameters, password-based authentication is used and a random password created for you. If you want password-based authentication, this method is recommended.
-
-$sp = New-AzADServicePrincipal -DisplayName VmCtrlNodeSPN # ps1
+$sp = New-AzADServicePrincipal -DisplayName YOUR-SPN-NAME # ps1
 
 # The following code allows you to export the secret:
-
 $sp.PasswordCredentials.SecretText # ps1
 
-
+# RBACK
 New-AzRoleAssignment -ApplicationId $sp.Id -RoleDefinitionName 'Contributor' #  -Scope can fine tune this to rg
 
 # Get ID
@@ -152,12 +150,13 @@ $sp.Id  # ps1
 
 ```bash
 
-Option 2: Define Ansible environment variables
-On the host virtual machine, export the service principal values to configure your Ansible credentials.
+# Option 2: Define Ansible environment variables
+# On the host virtual machine, export the service principal values to configure your Ansible credentials.
 export AZURE_SUBSCRIPTION_ID=Subscription ID
 export AZURE_CLIENT_ID=$sp.Id 
 export AZURE_SECRET=$sp.PasswordCredentials.SecretText
-export AZURE_TENANT=Default Directory | Overview
+# export AZURE_TENANT=Default Directory | Overview
+export AZURE_CLIENT_ID=Default directory Application (client) ID # This was correct
 
 ansible localhost -m azure.azcollection.azure_rm_resourcegroup -a "name=Rg-test-iac456 location=uksouth"
 # [WARNING]: No inventory was parsed, only implicit localhost is available
