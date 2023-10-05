@@ -105,7 +105,16 @@ ansible --version
 #  python version = 3.10.12 (main, Jun 11 2023, 05:26:28) [GCC 11.4.0]
 
 ansible-galaxy collection list
-# alot yes
+# # /usr/lib/python3/dist-packages/ansible_collections
+# Collection                Version
+# ------------------------- -------
+# amazon.aws                1.4.0
+# ansible.netcommon         1.5.0
+# ansible.posix             1.1.1
+# ansible.windows           1.4.0
+# arista.eos                1.3.0
+# awx.awx                   14.1.0
+# azure.azcollection        1.4.0
 
 ansible-galaxy collection install azure.azcollection
 # Starting galaxy collection install process
