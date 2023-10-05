@@ -165,14 +165,6 @@ ansible localhost -m azure.azcollection.azure_rm_resourcegroup -a "name=Rg-test-
 #    "changed": false,
 #    "module_stderr": "ClientSecretCredential.get_token failed: Authentication failed: AADSTS700016: Application with identifie
 
-# This can happen if the application has not been installed by the administrator of the tenant or consented to by any user in the tenant. You may have sent your authentication request to the wrong tenant
-
-# Go to Default Directory | App registrations
-# Go to th SPN
-# SPN | App roles
-# To create cusom roles, your organization needs P1 or P2.....fack
-
-# Na same error
 # ClientSecretCredential.get_token failed: Authentication failed: AADSTS700016: Application with identifier
 # This can happen if the application has not been installed by the administrator of the tenant or consented to by any user in the tenant. You may have sent your authentication request to the wrong tenant
 
