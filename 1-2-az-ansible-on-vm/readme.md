@@ -146,7 +146,7 @@ $sp.Id
 New-AzRoleAssignment -ApplicationId $sp.Id -RoleDefinitionName 'Contributor' #  -Scope can fine tune this to rg
 
 ```
-### Export vars and run create
+### Option 2: Define Ansible environment variables (Export vars and run)
 
 ```bash
 
