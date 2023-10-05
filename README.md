@@ -110,7 +110,13 @@ https://learn.microsoft.com/en-us/azure/developer/ansible/module-version-matrix
 
 Using Ansible with Azure
 
-https://learn.microsoft.com/en-us/azure/developer/ansible/overview
+https://learn.microsoft.com/en-us/azure/developer/ansible/
+
+Use infrastructure automation tools with virtual machines in Azure
+
+Ansible is an automation engine for configuration management, VM creation, or application deployment. Ansible uses an agent-less model, typically with SSH keys, to authenticate and manage target machines. Configuration tasks are defined in playbooks, with several Ansible modules available to carry out specific tasks
+
+https://learn.microsoft.com/en-us/azure/virtual-machines/infrastructure-automation
 
 ## Tutorials point
 
