@@ -134,16 +134,16 @@ pip3 install -r ~/.ansible/collections/ansible_collections/azure/azcollection/re
 # export keys? Yes
 
 # Without any other authentication parameters, password-based authentication is used and a random password created for you. If you want password-based authentication, this method is recommended.
-$sp = New-AzADServicePrincipal -DisplayName YOUR-SPN-NAME # ps1
+$sp = New-AzADServicePrincipal -DisplayName YOUR-SPN-NAME 
 
 # The following code allows you to export the secret:
-$sp.PasswordCredentials.SecretText # ps1
+$sp.PasswordCredentials.SecretText 
+
+# Get ID
+$sp.Id
 
 # RBACK
 New-AzRoleAssignment -ApplicationId $sp.Id -RoleDefinitionName 'Contributor' #  -Scope can fine tune this to rg
-
-# Get ID
-$sp.Id  # ps1 
 
 ```
 ### Export vars and run create
