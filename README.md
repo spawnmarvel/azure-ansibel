@@ -174,6 +174,45 @@ ssh username@<ip_address-remote> -i /home/username/.ssh/id_rsa
 
 
 ```
+Vars and parameters
+
+```yaml
+# Every yml file starte with ---
+---
+- hosts: localhost
+  connection: local
+  vars:
+    file_name: myfile.txt
+  tasks:
+    - name: Create an empty file if it does not exist
+      file: # File module
+        path: "{{ file_name }}"
+        state: touch
+```
+```bash
+# Run the create file
+ansible-playbook main_file_module.yml 
+```
+
+```yaml
+# Every yml file starte with ---
+---
+- hosts: localhost
+  connection: local
+  tasks:
+    - name: Creating resource group - "{{ name }}"
+      azure_rm_resourcegroup:
+        name: "{{ name }}"
+        location: "{{ location }}"
+      register: rg
+    - debug:
+        var: rg
+```
+
+```bash
+# Run the create rg
+ansible-playbook rg.yml --extra-vars "name=Rg-test-89x location=uksouth"
+```
 
 
 

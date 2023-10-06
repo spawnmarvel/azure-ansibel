@@ -1,0 +1,11 @@
+# Every yml file starte with ---
+---
+- hosts: localhost
+  connection: local
+  vars:
+    file_name: myfile.txt
+  tasks:
+    - name: Create an empty file if it does not exist
+      file:
+        path: "{{ file_name }}"
+        state: touch
