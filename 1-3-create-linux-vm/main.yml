@@ -15,7 +15,7 @@
   - name: Add subnet
     azure_rm_subnet:
       resource_group: ResourceGroup1
-      name: subnet1
+      name: subnet
       address_prefix: "10.0.1.0/24"
       virtual_network: Vnet
   - name: Create public IP address
@@ -52,7 +52,7 @@
       name: vmuksqa12
       vm_size: Standard_B2s
       managed_disk_type: StandardSSD_LRS
-      os_disk_name: vmuksqa12_os
+      os_disk_name: vmuksqa12_os_disk
       admin_username: username
       ssh_password_enabled: false
       ssh_public_keys:
