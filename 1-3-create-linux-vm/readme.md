@@ -35,30 +35,13 @@ export AZURE_TENANT=Default Directory | Overview
 
 ```
 ## Yaml changes
-```yml
----
-- name: Create Azure VM
-  hosts: localhost
 
-azure_rm_resourcegroup:
-      name: myResourceGroup1
-      location: uksouth
-# [...]
-resource_group: myResourceGroup1
-      name: myVM
-      vm_size: Standard_B2s
+* add ---
+* edit username
+* edit sku type
+* changed to managed disk
+* added os disk name
 
-admin_username: username
-      ssh_password_enabled: false
-      ssh_public_keys:
-        - path: /home/username/.ssh/authorized_keys
-          key_data: "ssh-rsa AA [...]zQ== username@vmname "
-
-image:
-        offer: 0001-com-ubuntu-server-jammy
-        publisher: Canonical
-        sku: '22_04-lts-gen2'
-        version: latest
 ```
 
 Images
@@ -75,6 +58,8 @@ ansible-playbook main.yml
 TASK [Create VM] 
 
 fatal: [localhost]: FAILED! => {"changed": false, "msg": "Error fetching image Canonical UbuntuServer 22_04-lts-gen2 - (NotFound) Artifact: VMImage was not found.\nCode: NotFound\nMessage: Artifact: VMImage was not found."}
+
+Must find the correct image
 
 ```
 
