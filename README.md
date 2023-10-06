@@ -126,6 +126,17 @@ Common Playbook Issues
 
 https://www.tutorialspoint.com/ansible/ansible_troubleshooting.htm
 
+## Red Hat Enterprise Linux Automation with Ansible (RH294)
+
+* Install Red Hat Ansible Automation Platform on control nodes.
+* Create and update inventories of managed hosts and manage connections to them.
+* Automate administration tasks with Ansible Playbooks and ad hoc commands.
+* Write effective playbooks at scale.
+* Protect sensitive data used by Ansible Automation Platform with Ansible Vault.
+* Reuse code and simplify playbook development with Ansible Roles and Ansible Content Collections.
+
+https://www.redhat.com/en/services/training/rh294-red-hat-linux-automation-with-ansible
+
 ## Commands
 
 Create Azure credentials
