@@ -42,7 +42,9 @@ export AZURE_TENANT=Default Directory | Overview
 * changed to managed disk
 * added os disk name
 
-```
+All parameters for azure.azcollection.azure_rm_virtualmachine module – Manage Azure virtual machines
+
+https://docs.ansible.com/ansible/latest/collections/azure/azcollection/azure_rm_virtualmachine_module.html#azure-rm-virtualmachine-module
 
 Images
 https://ubuntu.com/server/docs/find-ubuntu-images-on-azure
