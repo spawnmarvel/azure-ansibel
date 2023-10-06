@@ -2,12 +2,12 @@
 
 ## Steps
 
-* Create a resource group
-* Create a virtual network
-* Create a public IP address
-* Create a network security group
-* Create a virtual network interface card
-* Create a virtual machine
+* Configure your environment
+* Create an SSH key pair
+* Implement the Ansible playbook
+*  Run the playbook
+* Verify the results
+* Connect to the VM
 
 ## Create an SSH key pair
 
@@ -62,3 +62,9 @@ ansible-playbook main.yml
 ![Deploy vm](https://github.com/spawnmarvel/azure-ansibel/blob/main/images/deploy_vm2.jpg)
 
 https://learn.microsoft.com/en-us/azure/developer/ansible/vm-configure?tabs=ansible
+
+## Connect to the VM
+
+```bash
+ssh username@<ip_address> -i /home/username/.ssh/authorized_keys/id_rsa
+```
