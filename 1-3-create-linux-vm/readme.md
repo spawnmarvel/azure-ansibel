@@ -59,6 +59,6 @@ ansible-playbook main.yml
 
 ```
 
-![Deploy vm](https://github.com/spawnmarvel/azure-ansibel/blob/main/images/deploy_vm.jpg)
+![Deploy vm](https://github.com/spawnmarvel/azure-ansibel/blob/main/images/deploy_vm2.jpg)
 
 https://learn.microsoft.com/en-us/azure/developer/ansible/vm-configure?tabs=ansible
