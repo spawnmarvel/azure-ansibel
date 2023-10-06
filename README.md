@@ -128,13 +128,33 @@ https://www.tutorialspoint.com/ansible/ansible_troubleshooting.htm
 
 ## Commands
 
+Create Azure credentials
+
+Option 2: Define Ansible environment variables
+
+```bash
+# Interact with Azure?
+# Make Spn and set
+
+# Option 2: Define Ansible environment variables
+# On the host virtual machine, export the service principal values to configure your Ansible credentials.
+export AZURE_SUBSCRIPTION_ID=Subscription ID
+export AZURE_CLIENT_ID=Default directory Application (client) ID 
+export AZURE_SECRET=$sp.PasswordCredentials.SecretText
+export AZURE_TENANT=Default Directory | Overview
+
+```
+Create an Azure service principal with Azure PowerShell
+
+https://learn.microsoft.com/en-us/powershell/azure/create-azure-service-principal-azureps?view=azps-10.4.1
+
+General:
+
 ```bash
 # No params
 ansible-playbook run_cmd.yml
 
 ansible-playbook main.yml
-
-
 
 ```
 

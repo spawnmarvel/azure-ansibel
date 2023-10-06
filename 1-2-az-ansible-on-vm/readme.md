@@ -153,10 +153,10 @@ New-AzRoleAssignment -ApplicationId $sp.Id -RoleDefinitionName 'Contributor' #  
 # Option 2: Define Ansible environment variables
 # On the host virtual machine, export the service principal values to configure your Ansible credentials.
 export AZURE_SUBSCRIPTION_ID=Subscription ID
-export AZURE_CLIENT_ID=$sp.Id 
-export AZURE_SECRET=$sp.PasswordCredentials.SecretText
-# export AZURE_TENANT=Default Directory | Overview
 export AZURE_CLIENT_ID=Default directory Application (client) ID # This was correct
+export AZURE_SECRET=$sp.PasswordCredentials.SecretText
+export AZURE_TENANT=Default Directory | Overview
+
 
 ansible localhost -m azure.azcollection.azure_rm_resourcegroup -a "name=Rg-test-iac456 location=uksouth"
 # [WARNING]: No inventory was parsed, only implicit localhost is available
