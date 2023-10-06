@@ -151,7 +151,8 @@ https://learn.microsoft.com/en-us/powershell/azure/create-azure-service-principa
 General:
 
 ```bash
-# No params just make some files
+# No params just make some files on the control node
+
 ansible-playbook run_cmd.yml
 
 # Create a vm
