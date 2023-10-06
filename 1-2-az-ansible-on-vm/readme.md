@@ -146,6 +146,14 @@ $sp.Id
 New-AzRoleAssignment -ApplicationId $sp.Id -RoleDefinitionName 'Contributor' #  -Scope can fine tune this to rg
 
 ```
+Create an Azure service principal with Azure PowerShell
+
+https://learn.microsoft.com/en-us/powershell/azure/create-azure-service-principal-azureps?view=azps-10.4.1
+
+Assign Azure roles using Azure PowerShell
+
+https://learn.microsoft.com/en-us/azure/role-based-access-control/role-assignments-powershell
+
 ### Option 2: Define Ansible environment variables (Export vars and run)
 
 ```bash
