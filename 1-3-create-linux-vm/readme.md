@@ -80,5 +80,9 @@ ssh username@<ip_address-remote> -i /home/username/.ssh/id_rsa
 # [...]
 username@myVMuks89:~$ pwd
 /home/username
-username@myVMuks89:~$ 
+username@myVMuks89:~$
+exit
+# logout
+# Connection to xx.xx.xxx.xxx closed.
+username@VmCtrlNode03:~$
 ```
