@@ -158,6 +158,7 @@ ansible-playbook run_cmd.yml
 ansible-playbook main.yml
 
 # Connect to it
+ssh username@<ip_address-remote> -i /home/username/.ssh/id_rsa
 
 
 ```
