@@ -1,7 +1,7 @@
 ---
 - name: Create Azure VM
-  hosts: localhost
-  connection: local
+  hosts: localhost     
+  connection: local    
   tasks:
   - name: Create resource group
     azure_rm_resourcegroup:
@@ -17,12 +17,12 @@
       resource_group: ResourceGroup1
       name: subnet
       address_prefix: "10.0.1.0/24"
-      virtual_network: Vnet
+      virtual_network: vnet12
   - name: Create public IP address
     azure_rm_publicipaddress:
       resource_group: ResourceGroup1
       allocation_method: Static
-      name: publicip12
+      name: public-ip12
     register: output_ip_address
   - name: Public IP of VM
     debug:
@@ -30,7 +30,7 @@
   - name: Create Network Security Group that allows SSH
     azure_rm_securitygroup:
       resource_group: ResourceGroup1
-      name: NetworkSecurityGroup
+      name: network-security-group12
       rules:
         - name: SSH
           protocol: Tcp
@@ -43,24 +43,24 @@
       resource_group: ResourceGroup1
       name: nic12
       virtual_network: vnet12
-      subnet: Subnet
-      public_ip_name: publicip12
-      security_group: NetworkSecurityGroup
+      subnet: subnet
+      public_ip_name: public-ip12
+      security_group: network-security-group12
   - name: Create VM
     azure_rm_virtualmachine:
       resource_group: ResourceGroup1
-      name: vmuksqa12
+      name: vm-uksqa12
       vm_size: Standard_B2s
       managed_disk_type: StandardSSD_LRS
-      os_disk_name: vmuksqa12_os_disk
+      os_disk_name: vm-uksqa12_os_disk
       admin_username: username
       ssh_password_enabled: false
       ssh_public_keys:
         - path: /home/username/.ssh/authorized_keys
-          key_data: "ssh-rsa [...] Q== username@vmname"
-      network_interfaces: NIC
+          key_data: "ssh-rsa A [...] Q== username@vmname"
+      network_interfaces: nic12
       image:
-        offer: 0001-com-ubuntu-server-jam
+        offer: 0001-com-ubuntu-server-jammy
         publisher: Canonical
         sku: '22_04-lts'
         version: latest
