@@ -166,7 +166,7 @@ General:
 
 ansible-playbook run_cmd.yml
 
-# Create a vm
+# Create a vm, no parma, plain file
 ansible-playbook main.yml
 
 # Connect to it
@@ -194,6 +194,8 @@ Vars and parameters
 ansible-playbook main_file_module.yml 
 ```
 
+Create an Azure resource group
+
 ```yaml
 # Every yml file starte with ---
 ---
@@ -212,6 +214,27 @@ ansible-playbook main_file_module.yml
 ```bash
 # Run the create rg
 ansible-playbook rg.yml --extra-vars "name=Rg-test-89x location=uksouth"
+```
+
+Delete an Azure resource group
+
+```yaml
+# Every yml file starte with ---
+---
+- hosts: localhost
+  connection: local
+  tasks:
+    - name: Deleting resource group - "{{ name }}"
+      azure_rm_resourcegroup:
+        name: "{{ name }}"
+        state: absent
+      register: rg
+    - debug:
+        var: rg
+```
+
+```bash
+ansible-playbook del_rg.yml --extra-vars "name=Rg-test89x"
 ```
 
 
