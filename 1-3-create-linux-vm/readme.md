@@ -42,7 +42,7 @@ export AZURE_TENANT=Default Directory | Overview
 * changed to managed disk
 * added os disk name
 
-All parameters for azure.azcollection.azure_rm_virtualmachine module – Manage Azure virtual machines
+All parameters for ansible module azure.azcollection.azure_rm_virtualmachine module – Manage Azure virtual machines
 
 https://docs.ansible.com/ansible/latest/collections/azure/azcollection/azure_rm_virtualmachine_module.html#azure-rm-virtualmachine-module
 
@@ -57,12 +57,8 @@ az vm image list --location 'uksouth' -p Canonical --all -o table
 # Run it
 ansible-playbook main.yml
 
-TASK [Create VM] 
-
-fatal: [localhost]: FAILED! => {"changed": false, "msg": "Error fetching image Canonical UbuntuServer 22_04-lts-gen2 - (NotFound) Artifact: VMImage was not found.\nCode: NotFound\nMessage: Artifact: VMImage was not found."}
-
-Must find the correct image
-
 ```
+
+![Deploy vm](https://github.com/spawnmarvel/azure-ansibel/blob/main/images/deploy_vm.jpg)
 
 https://learn.microsoft.com/en-us/azure/developer/ansible/vm-configure?tabs=ansible
