@@ -137,6 +137,10 @@ https://www.tutorialspoint.com/ansible/ansible_troubleshooting.htm
 
 https://www.redhat.com/en/services/training/rh294-red-hat-linux-automation-with-ansible
 
+## Playbook Keywords
+
+https://docs.ansible.com/ansible/latest/reference_appendices/playbooks_keywords.html
+
 ## Commands
 
 Create Azure credentials
