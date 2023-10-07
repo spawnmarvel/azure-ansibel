@@ -69,7 +69,7 @@ config file = /etc/ansible/ansible.cfg
 ```
 
 ```bash
-
+cd chapter1
 sudo nano ansible.cfg
 # [defaults]
 # INVENTORY = inventory
@@ -92,7 +92,9 @@ Result
 
 ```bash
 # SSH key
-# We have a private key on the control node and we put the public key on the remote host and connect securly.
+# We have a private key on the control node and we put the public key on the remote host and connect securly with key based auth.
+# More secure, easier to automate and passwords are not flying around.
+
 ssh imsdal@20.77.101.194 -i /home/imsdal/.ssh/id_rsa
 
 # Password
