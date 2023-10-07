@@ -53,10 +53,10 @@
       vm_size: Standard_B2s
       managed_disk_type: StandardSSD_LRS
       os_disk_name: vm-uksqa12_os_disk
-      admin_username: username
+      admin_username: imsdal
       ssh_password_enabled: false
       ssh_public_keys:
-        - path: /home/username/.ssh/authorized_keys
+        - path: /home/imsdal/.ssh/authorized_keys
           key_data: "ssh-rsa A [...] Q== username@vmname"
       network_interfaces: nic12
       image:

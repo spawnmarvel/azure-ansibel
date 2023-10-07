@@ -104,7 +104,13 @@ ssh imsdal@20.77.101.194 -i /home/imsdal/.ssh/id_rsa
 ```
 Example
 
-![Topology ](https://github.com/spawnmarvel/azure-ansibel/blob/main/images/topology.jpg)
+![Topology ](https://github.com/spawnmarvel/azure-ansibel/blob/main/images/topology1.jpg)
+
+## Copy ssh key to remote host using Ansible
+
+https://mahira-technology.medium.com/how-to-copy-ssh-key-to-remote-host-using-ansible-9b0fd00f3786
+
+https://jhooq.com/ansible-ssh-keys-for-server-mgmt/
 
 ## Ad-hoc commands
 
