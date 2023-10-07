@@ -240,6 +240,11 @@ vagrant init geerlinguy/centos7
 vagrant up
 
 # https://www.fosslinux.com/69145/install-vagrant-on-ubuntu.htm
+
+# Vagrant alternatives
+# Many Azure VM is one of thoose, keep using that.
+
+# https://alternativeto.net/software/vagrant/
 ```
 
 Time 38
