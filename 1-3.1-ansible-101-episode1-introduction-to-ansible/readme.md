@@ -187,6 +187,14 @@ Vagrant
 * It allows for some fundamental integration and automation with platforms like VirtualBox, Microsoft Hyper-V, VMware, etc. 
 * In summary, this is a time-saving tool for standing up VMs faster, configuring them, adding packages to VMs, or integrating your virtual platforms with tools like Ansible. 
 
+
+Why Use Vagrant and Virtualbox
+* Building a software prototyping environment (aka lab) is far simpler than ever before. 
+* No longer do you have to wait to build a physical machine, then wait to download ISO images of the virtualization stuff, operating systems, software packages etc.
+* Simply use Vagrant and VirtualBox together. You'll have a highly functional lab for software development up fast with some added agility for prototyping infrastructure choices too.
+
+https://www.openlogic.com/blog/how-use-vagrant-and-virtualbox#what-is-virtualbox
+
 Download vagrant
 
 Download virtualbox
