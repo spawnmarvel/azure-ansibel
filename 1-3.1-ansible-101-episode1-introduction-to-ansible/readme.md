@@ -17,6 +17,7 @@ mkdir chapter1
 cd chapter1
 
 touch inventory
+sudo nano inventory
 
 # [example]
 # 20.77.101.194
@@ -24,6 +25,8 @@ touch inventory
 # i= inventory, m= module and user
 ansible -i inventory example -m ping -u imsdal
 ```
+
+Result
 
 ```log
 20.77.101.194 | SUCCESS => {
@@ -63,4 +66,25 @@ config file = None
 
 # But once you manually create directory under /etc as ansible and add ansible.cfg file there ansible automatically detects it. but you will have to configure the rest manually like hosts file..etc . so after this we get
 config file = /etc/ansible/ansible.cfg
+```
+
+```bash
+
+sudo nano ansible.cfg
+# [defaults]
+# INVENTORY = inventory
+
+ansible example -m ping -u imsdal
+
+```
+Result
+
+```log
+20.77.101.194 | SUCCESS => {
+    "ansible_facts": {
+        "discovered_interpreter_python": "/usr/bin/python3"
+    },
+    "changed": false,
+    "ping": "pong"
+}
 ```
