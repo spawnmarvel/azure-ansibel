@@ -245,6 +245,9 @@ vagrant up
 # Many Azure VM is one of thoose, keep using that.
 
 # https://alternativeto.net/software/vagrant/
+
+# Make a new VM and install Ansible again for fun.
+
 ```
 
-Time 38
+Time 38, just watch the rest
