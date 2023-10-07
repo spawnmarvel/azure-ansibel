@@ -10,7 +10,7 @@ https://www.youtube.com/watch?v=goclfp6a2IQ&list=LL&index=2
 
 The Ansible inventory file defines the hosts and groups of hosts upon which commands, modules, and tasks in a playbook operate.
 
-#### Inventory and ping
+Inventory and ping
 
 ```bash
 mkdir chapter1
