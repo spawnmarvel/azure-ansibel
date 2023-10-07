@@ -106,4 +106,13 @@ Example
 
 ![Topology ](https://github.com/spawnmarvel/azure-ansibel/blob/main/images/topology.jpg)
 
+## Ad-hoc commands
 
+```bash
+ansible example -a "free -h" -u imsdal
+# 20.77.101.194 | CHANGED | rc=0 >>
+#               total        used        free      shared  buff/cache   available
+#Mem:           3.8Gi       277Mi       3.2Gi       4.0Mi       382Mi       3.3Gi
+#Swap:             0B          0B          0B
+```
+Time 29.05
