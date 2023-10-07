@@ -102,6 +102,7 @@ ssh imsdal@20.77.101.194 -i /home/imsdal/.ssh/id_rsa
 # SSH keys are encouraged, but you can use password authentication if needed with the -k --ask-pass
 
 ```
+Example
 
 ![Topology ](https://github.com/spawnmarvel/azure-ansibel/blob/main/images/topology.jpg)
 
