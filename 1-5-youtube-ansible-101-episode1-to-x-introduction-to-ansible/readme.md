@@ -246,8 +246,10 @@ vagrant up
 
 # https://alternativeto.net/software/vagrant/
 
+# Just setting up a vm and doing ssh
+
 # Make a new VM and install Ansible again for fun.
 
 ```
 
-Time 38, just watch the rest
+Time 44, just watch the rest
