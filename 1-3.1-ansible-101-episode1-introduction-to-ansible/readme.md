@@ -105,7 +105,13 @@ ssh imsdal@20.77.101.194 -i /home/imsdal/.ssh/id_rsa
 Example VM's
 
 ```bash
-ansible-playbook main.yml
+
+export AZURE_SUBSCRIPTION_ID=Subscription ID
+export AZURE_CLIENT_ID=Default directory Application (client) ID 
+export AZURE_SECRET=$sp.PasswordCredentials.SecretText
+export AZURE_TENANT=Default Directory | Overview
+
+ansible-playbook createvm/main.ym
 
 ```
 
