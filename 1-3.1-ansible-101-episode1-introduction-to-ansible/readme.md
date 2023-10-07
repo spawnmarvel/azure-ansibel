@@ -4,9 +4,9 @@
 
 https://www.youtube.com/watch?v=goclfp6a2IQ&list=LL&index=2
 
-## Notes
 
-### Connecting to a Server with Ansible
+
+## Connecting to a Server with Ansible
 
 The Ansible inventory file defines the hosts and groups of hosts upon which commands, modules, and tasks in a playbook operate.
 
@@ -49,7 +49,7 @@ whereis ansible
 
 ```
 
-# Override ansibe cfg default
+## Override ansibe cfg default
 
 ```bash
 # The default Ansible configuration file is located under /etc/ansible/ansible.cfg
@@ -87,4 +87,17 @@ Result
     "changed": false,
     "ping": "pong"
 }
+```
+## SSH key or password
+
+```bash
+# SSH key
+# We have a private key on the control node and we put the public key on the remote host and connect securly.
+ssh imsdal@20.77.101.194 -i /home/imsdal/.ssh/id_rsa
+
+# Password
+# By default, Ansible assumes you are using SSH keys to connect to remote machines. 
+# SSH keys are encouraged, but you can use password authentication if needed with the -k --ask-pass
+
+
 ```
