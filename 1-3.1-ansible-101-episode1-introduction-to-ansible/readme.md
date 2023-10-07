@@ -114,6 +114,9 @@ https://jhooq.com/ansible-ssh-keys-for-server-mgmt/
 
 ## Ad-hoc commands
 
+https://docs.ansible.com/ansible/2.8/user_guide/intro_adhoc.html
+
+
 ```bash
 ansible example -a "free -h" -u imsdal
 # 20.77.101.194 | CHANGED | rc=0 >>
