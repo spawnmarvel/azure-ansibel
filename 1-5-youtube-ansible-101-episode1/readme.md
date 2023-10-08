@@ -177,6 +177,39 @@ Yum: install
 Shell: if this then that
 Command: apt install, it does not know
 
-## Ansible 101 - Episode 2 - Ad-hoc tasks and Inventory
+## Ansible 101 - Episode 2 - Ad-hoc tasks and inventory
 
+Intro to ad-hoc
+
+```bash
+# More useful to use a playbook, but
+# Check resources, logfiles, restart service, add or remove accees, 
+# copy files, update hosts, reboot and cron jobs, etc.
+
+mkdir adhoc
+cd adhoc
+sudo nano inventory
+
+# App server
+# [app]
+# ip
+
+# Db servers
+# [db]
+# ip
+
+# This group has all the servers
+[multi:children]
+app
+db
+
+# Varables for all the servers
+[multi:vars]
+ansible_ssh_user=imsdal
+ansible_ssh_private_key=~/home/imsdal/.ssh/authorized_keys?the privat ekey
+
+
+```
 https://www.youtube.com/watch?v=7kVfqmGtDL8&list=PL2_OBreMn7FqZkvMYt6ATmgC0KAGGJNAN&index=2
+
+time
