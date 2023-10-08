@@ -161,8 +161,13 @@ ansible hosts -m command -a "date" -u imsdal
 Vagrant with virtualbox alternative to Azure Vm's.
 
 ```bash
+
+ls
+# chapter1  chapter2  create-vm  manage-vm  remember_2_change_inventory
+
 mkdir chapter2
 # Make a new VM and install Ansible again for fun, he uses Vagrant and virtualbox.
+
 
 ```
 Use the modules, then it know and you can flag changes.
