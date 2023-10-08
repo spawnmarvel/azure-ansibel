@@ -18,11 +18,12 @@ ls
 # authorized_keys
 
 ssh-keygen -m PEM -t rsa -b 4096
+# Generating public/private rsa key pair.
+# Enter file in which to save the key (/home/imsdal/.ssh/id_rsa): 
 
 # When prompted, specify the files to be created in the following directory
 /home/imsdal/.ssh/authorized_keys
 
-# Generating public/private rsa key pair.
 # Enter file in which to save the key (/home/imsdal/.ssh/id_rsa): /home/imsdal/.ssh/authorized_keys
 # /home/imsdal/.ssh/authorized_keys already exists.
 # Overwrite (y/n)? y
@@ -68,6 +69,10 @@ az vm image list --location 'westus' --publisher Canonical --offer '0001-com-ubu
 
 az vm image list --location 'uksouth' -p Canonical --all -o table
 
+```
+Create VM
+
+```bash
 # Run it
 ansible-playbook create-vm/main.yml
 
