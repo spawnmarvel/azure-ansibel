@@ -76,30 +76,51 @@ ansible-playbook create-vm/main.yml
 [WARNING]: No inventory was parsed, only implicit localhost is available
 [WARNING]: provided hosts list is empty, only localhost is available. Note that the implicit localhost does not match 'all'
 
-PLAY [Create Azure VM] ******************************************************************************************************************************************************************************************************************************************
-TASK [Gathering Facts] ******************************************************************************************************************************************************************************************************************************************ok: [localhost]
+PLAY [Create Azure VM] ****
 
-TASK [Create resource group] ************************************************************************************************************************************************************************************************************************************changed: [localhost]
+TASK [Gathering Facts] ****
 
-TASK [Create virtual network] ***********************************************************************************************************************************************************************************************************************************changed: [localhost]
+ok: [localhost]
 
-TASK [Add subnet] ***********************************************************************************************************************************************************************************************************************************************changed: [localhost]
+TASK [Create resource group] ****
 
-TASK [Create public IP address] *********************************************************************************************************************************************************************************************************************************changed: [localhost]
+changed: [localhost]
 
-TASK [Public IP of VM] ******************************************************************************************************************************************************************************************************************************************ok: [localhost] => {
+TASK [Create virtual network] ****
+
+changed: [localhost]
+
+TASK [Add subnet] **** 
+
+changed: [localhost]
+
+TASK [Create public IP address] **** 
+
+changed: [localhost]
+
+TASK [Public IP of VM] ****
+
+ok: [localhost] => {
     "msg": "The public IP is 20.58.58.237."
 }
 
-TASK [Create Network Security Group that allows SSH] ************************************************************************************************************************************************************************************************************changed: [localhost]
+TASK [Create Network Security Group that allows SSH] ****
 
-TASK [Create virtual network interface card] ********************************************************************************************************************************************************************************************************************[DEPRECATION WARNING]: Setting ip_configuration flatten is deprecated and will be removed. Using ip_configurations list to define the ip configuration. This feature will be removed in version [2, 9]. Deprecation warnings can be disabled by setting 
+changed: [localhost]
+
+TASK [Create virtual network interface card] **** 
+
+[DEPRECATION WARNING]: Setting ip_configuration flatten is deprecated and will be removed. Using ip_configurations list to define the ip configuration. This feature will be removed in version [2, 9]. Deprecation warnings can be disabled by setting 
 deprecation_warnings=False in ansible.cfg.
 changed: [localhost]
 
-TASK [Create VM] ************************************************************************************************************************************************************************************************************************************************changed: [localhost]
+TASK [Create VM] ****
 
-PLAY RECAP ******************************************************************************************************************************************************************************************************************************************************localhost                  : ok=9    changed=7    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
+*changed: [localhost]
+
+PLAY RECAP ****
+
+localhost                  : ok=9    changed=7    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
 
 ```
 
