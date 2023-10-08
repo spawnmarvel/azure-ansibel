@@ -251,5 +251,11 @@ vagrant up
 # Make a new VM and install Ansible again for fun.
 
 ```
+Use the modules, then it know and you can flag changes.
+Yum, shell module works as example.
+Not command module, it does not know what it does.
+Yum: install
+Shell: if this then that
+Command: apt install, it does not know
 
-Time 44, just watch the rest
+
