@@ -75,11 +75,11 @@ ls
   hosts: localhost
   connection: local
   tasks:
-    - name: Stop virtual machine
+    - name: Start virtual machine
       azure_rm_virtualmachine:
         resource_group: ResourceGroup1
         name: vm-uksqa13
-        allocated: no
+        started: yes
 
 ```
 Run it
