@@ -49,10 +49,10 @@
   - name: Create VM
     azure_rm_virtualmachine:
       resource_group: ResourceGroup1
-      name: vm-uksqa12
+      name: vm-uksqa13
       vm_size: Standard_B2s
       managed_disk_type: StandardSSD_LRS
-      os_disk_name: vm-uksqa12_os_disk
+      os_disk_name: vm-uksqa13_os_disk
       admin_username: imsdal
       ssh_password_enabled: false
       ssh_public_keys:
