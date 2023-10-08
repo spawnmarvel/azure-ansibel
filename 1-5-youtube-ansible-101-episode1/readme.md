@@ -212,4 +212,4 @@ ansible_ssh_private_key=~/home/imsdal/.ssh/authorized_keys?the privat ekey
 ```
 https://www.youtube.com/watch?v=7kVfqmGtDL8&list=PL2_OBreMn7FqZkvMYt6ATmgC0KAGGJNAN&index=2
 
-time
+time 25
