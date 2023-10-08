@@ -19,7 +19,7 @@ https://learn.microsoft.com/en-us/azure/developer/ansible/install-on-linux-vm?ta
 * Test Ansible installation
 
 
-## Install Ansible 1
+## Install Ansible
 ```bash
 ssh
 
@@ -78,7 +78,7 @@ pip3 install -r ~/.ansible/collections/ansible_collections/azure/azcollection/re
 pip3 freeze
 ```
 
-### Make SPN with CLI or PS1
+## Make SPN with CLI or PS1
 ```ps1
 
 # Without any other authentication parameters, password-based authentication is used and a random password created for you. If you want password-based authentication, this method is recommended.
@@ -102,7 +102,7 @@ Assign Azure roles using Azure PowerShell
 
 https://learn.microsoft.com/en-us/azure/role-based-access-control/role-assignments-powershell
 
-### Option 2: Define Ansible environment variables (Export vars and run)
+## Option 2: Define Ansible environment variables (Export vars and run)
 
 ```bash
 
@@ -117,7 +117,7 @@ export AZURE_TENANT=Default Directory | Overview
 ansible localhost -m azure.azcollection.azure_rm_resourcegroup -a "name=Rg-test-iac456 location=uksouth"
 
 ```
-### Result
+## Result
 
 ```log
 [WARNING]: No inventory was parsed, only implicit localhost is available
@@ -136,7 +136,7 @@ localhost | CHANGED => {
 }
 ```
 
-### Login and out of VM
+## Login and out of VM
 
 ```bash
 # Log out and in
