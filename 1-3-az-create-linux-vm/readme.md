@@ -60,7 +60,7 @@ All parameters for ansible module azure.azcollection.azure_rm_virtualmachine mod
 
 https://docs.ansible.com/ansible/latest/collections/azure/azcollection/azure_rm_virtualmachine_module.html#azure-rm-virtualmachine-module
 
-Images
+View images and key pair for name
 https://ubuntu.com/server/docs/find-ubuntu-images-on-azure
 
 ```bash
@@ -72,7 +72,7 @@ az vm image list --location 'uksouth' -p Canonical --all -o table
 ansible-playbook create-vm/main.yml
 
 ```
-Result
+## Result after run
 
 ```log
 [WARNING]: No inventory was parsed, only implicit localhost is available
@@ -144,7 +144,7 @@ Connection to 20.58.58.237 closed.
 imsdal@vmctrlnode04:~$
 ```
 
-Run the play again
+## Result after run 2
 
 ```bash
 ansible-playbook create-vm/main.yml 
