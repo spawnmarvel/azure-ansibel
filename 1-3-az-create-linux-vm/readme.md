@@ -143,3 +143,63 @@ logout
 Connection to 20.58.58.237 closed.
 imsdal@vmctrlnode04:~$
 ```
+
+Run the play again
+
+```bash
+ansible-playbook create-vm/main.yml 
+
+```
+
+```log
+[WARNING]: No inventory was parsed, only implicit localhost is available
+
+[WARNING]: provided hosts list is empty, only localhost is available. Note that the implicit localhost does not match 'all'
+
+PLAY [Create Azure VM] ****
+
+TASK [Gathering Facts] **** 
+
+ok: [localhost]
+
+TASK [Create resource group] ****
+
+ok: [localhost]
+
+TASK [Create virtual network] ****
+
+ok: [localhost]
+
+TASK [Add subnet] **** 
+
+ok: [localhost]
+
+TASK [Create public IP address] ****
+
+ok: [localhost]
+
+TASK [Public IP of VM] ****
+
+ok: [localhost] => {
+    "msg": "The public IP is 20.58.58.237."
+}
+
+TASK [Create Network Security Group that allows SSH] ****
+
+ok: [localhost]
+
+TASK [Create virtual network interface card] ****
+
+[DEPRECATION WARNING]: Setting ip_configuration flatten is deprecated and will be removed. Using ip_configurations list to define the ip configuration. This feature will be removed in version [2, 9]. Deprecation warnings can be disabled by setting
+deprecation_warnings=False in ansible.cfg.
+
+ok: [localhost]
+
+TASK [Create VM] **** 
+
+ok: [localhost]
+
+PLAY RECAP ****
+
+localhost                  : ok=9    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
+```
