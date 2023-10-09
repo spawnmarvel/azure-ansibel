@@ -3,6 +3,15 @@ Testing and learning Ansibel with Azure
 
 ## Got automation? Here's a quick guide to get you up to speed on Ansible
 
+Linux, SSH
+
+* Set up SSH connections so Ansible can connect to the managed nodes.
+* Add your public SSH key to the authorized_keys file on each remote system.
+
+Windows, This document discusses the setup that is required before Ansible can communicate with a Microsoft Windows host.
+
+https://docs.ansible.com/ansible/latest/os_guide/windows_setup.html
+
 ### Ansible modules
 
 * Online: By searching Ansible documentation, https://docs.ansible.com/
