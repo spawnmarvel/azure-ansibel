@@ -11,7 +11,7 @@ Linux, SSH
 * Step 2: Add your public SSH key to the authorized_keys file on each remote system.
 * Step 3: Test Connection
 
-Windows, This document discusses the setup that is required before Ansible can communicate with a Microsoft Windows host.
+Windows
 
 https://docs.ansible.com/ansible/latest/os_guide/windows_setup.html
 
