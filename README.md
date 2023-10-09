@@ -1,7 +1,9 @@
 # azure-ansibel
 Testing and learning Ansibel with Azure
 
-## Got automation? Here's a quick guide to get you up to speed on Ansible
+## Got automation? 
+
+Here's a quick guide to get you up to speed on Ansible
 
 Linux, SSH
 
