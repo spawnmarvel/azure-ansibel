@@ -177,6 +177,11 @@ https://learn.microsoft.com/en-us/powershell/azure/create-azure-service-principa
 
 https://docs.ansible.com/ansible/latest/reference_appendices/playbooks_keywords.html
 
+## Getting started
+
+![Topology]()
+https://docs.ansible.com/ansible/latest/getting_started/index.html
+
 ## Commands
 General:
 
