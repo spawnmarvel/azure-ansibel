@@ -1,102 +1,93 @@
 # azure-ansibel
 Testing and learning Ansibel with Azure
 
-# 1 Why Ansible?
+## Got automation? Here's a quick guide to get you up to speed on Ansible
 
-Working in IT, you're likely doing the same tasks over and over. What if you could solve problems once and then automate your solutions going forward?
+Ansible modules
 
-## 1.1 Learning Ansible basics
+* Online: By searching Ansible documentation, https://docs.ansible.com/
 
-Ansible is an open source IT automation engine that automates provisioning, configuration management, application deployment, orchestration, and many other IT processes.
+```bash
+# Offline: Using the ansible-doc command from the command line.
+# Here, you are searching on how to use a module called file.
+ansible-doc file
+```
+Ansible and Python
 
-Use Ansible automation to install software, automate daily tasks, provision infrastructure, improve security and compliance, patch systems, and share automation across your organization.
+* Ansible is heavily dependent on Python. Most of the modules are coded with Python. Also, the target Linux-based system must have Python installed to start automating tasks using Ansible.
 
-Modules
-* Ansible works by connecting to your nodes and pushing out small programs—called modules—to these nodes. Modules are used to accomplish automation tasks in Ansible. 
+Ansible Engine vs. Ansible Tower
 
-Agentless automation
-* Ansible is agentless, which means the nodes it manages do not require any software to be installed on them. Ansible reads information about which machines you want to manage from your inventory. Ansible has a default inventory file, but you can create your own and define which servers you want to be managed. 
-* Ansible uses SSH protocol to connect to servers and run tasks. By default, Ansible uses SSH keys with ssh-agent and connects to remote machines using your current user name. Root logins are not required. You can log in as any user, and then su or sudo to any user.
-
-Ansible Playbooks
-* Ansible Playbooks are used to orchestrate IT processes. A playbook is a YAML file—which uses a .yml or .yaml extension—containing 1 or more plays, and is used to define the desired state of a system. This differs from an Ansible module, which is a standalone script that can be used inside an Ansible Playbook. 
-
-* Variables
-Variables are a concept in Ansible that enable you to alter how playbooks run. Variables are used to account for differences between systems, such as package versions or file paths. With Ansible, you can execute playbooks across different systems
-
-Roles
-* Ansible roles are a special kind of playbook that is fully self-contained and portable with the tasks, variables, configuration templates, and other supporting files that are needed to complete a complex orchestration
-
-Collections
-* When working with Ansible you will also need to understand collections. Collections are a distribution format for Ansible content that can include playbooks, roles, modules, and plugins.
+* Ansible is meant to be used by different DevOps teams. Ansible Tower allows many teams to execute automation tasks from a centralized location that permits RBAC, logging of executed tasks, a GUI to run tasks, and more features. 
 
 
-https://www.redhat.com/en/topics/automation/learning-ansible-tutorial
+Which Ansible approach?
 
-## 2 Ansible galaxy
+* Ad-hoc is a way to send a single Ansible task to the target system(s). You can see this by running a command on a remote system using SSH or legacy rsh
+* Ansible Plays are collections of different files in YAML format, which will run on one or more target systems. These plays are written in a file called a playbook.
 
-Ansible Galaxy refers to the Galaxy website, a free site for finding, downloading, and sharing community developed collections and roles
+YAML Ain't Markup Language, (YAML) is the format in which Ansible playbooks are written. 
 
-https://galaxy.ansible.com/ui/
+Files
 
-## 3 Getting started with Ansible
+Playbook
 
-Ansible automates the management of remote systems and controls their desired state. A basic Ansible environment has three main components:
-
-Control node
-* A system on which Ansible is installed. You run Ansible commands such as ansible or ansible-inventory on a control node.
-
-Managed node
-* A remote system, or host, that Ansible controls.
+* A playbook is a file written in YAML format which contains tasks to be executed on the target system(s). Tasks that target the same systems are usually grouped in a play, and a playbook can contain one or more plays. Ansible engine executes the tasks from the top of the file down.
 
 Inventory
-* A list of managed nodes that are logically organized. You create an inventory on the control node to describe host deployments to Ansible.
 
-Playbooks
-* They contain Plays (which are the basic unit of Ansible execution).
+* Ansible Inventory is a file that identifies your target system(s). You can create groups within your inventory to organize your systems.
+* Static Inventories: Files for static inventories can be written in either INI or YAML formats, and you can have more than one inventory file. You can specify which one to use by typing -i path in the command file.
+```bash
+# You can specify which one to use by typing -i path in the command file.
+-i path
+```
+* Dynamic Inventories: A dynamic inventory is a script that will execute to get the targeted system(s) each time you run your playbook. This is useful when you are running your playbook targeting systems deployed in the cloud, and every time you have more (or less) system(s), for the playbook to target.
 
-Play
-* The Play contains variables, roles and an ordered lists of tasks and can be run repeatedly.
+Ansible.cfg
+
+* Ansible.cfg is the Ansible configuration file. It is in INI format. Usually, it is saved in /etc/ansible/ansible.cfg. It controls system-wide Ansible settings. 
+* However, you might need to change one or more settings for your specific project (i.e., changing the format of stdout on the screen from JSON to YAML). 
+* You can create your own ansible.cfg file and place it in the project directory where you are changing only the setting you want to overwrite.
+
+Variable files
+
+* Variables in Ansible are an important subject, and require time to understand and practice. You can define variables in more than 20 locations. You must understand variable precedence to pick up the proper location.
 
 Roles
-* A limited distribution of reusable Ansible content (tasks, handlers, variables, plugins, templates and files) for use inside of a Play. 
 
-Tasks
-* The definition of an ‘action’ to be applied to the managed host. Tasks must always be contained in a Play, directly or indirectly (Role, or imported/included task list file).
+* The main goals of automation are to minimize manual tasks and speed up deployment activities. 
+* If you have one or more tasks that you are doing often during different plays and want to keep them in a shared location and reference them when needed, then Ansible Roles will help you.
 
-Handlers
-* A special form of a Task, that only executes when notified by a previous task which resulted in a ‘changed’ status.
+Ansible Galaxy
 
-Modules
-* The code or binaries that Ansible copies to and executes on each managed node (when needed) to accomplish the action defined in each Task.
+* Ansible Galaxy is a community platform where you can download extra tools for Ansible, additional modules, roles, and playbooks. If you are new to Ansible, remember that Ansible has a vast community. 
+* For almost every case you want to solve with Ansible, someone else in the community has probably thought about it and uploaded it to Ansible Galaxy
 
-Plugins
-* Pieces of code that expand Ansible’s core capabilities.
+Automation Hub
 
-Collections
-* A format in which Ansible content is distributed that can contain playbooks, roles, modules, and plugins. You can install and use collections through Ansible Galaxy
-
-https://docs.ansible.com/ansible/latest/network/getting_started/basic_concepts.html#
-
-https://docs.ansible.com/ansible/latest/getting_started/index.html
-
-## 4 Installing ansible
-
-Controll node
-* For your control node (the machine that runs Ansible), you can use nearly any UNIX-like machine with Python 3.9 or newer installed. 
+* Automation Hub can be seen as the paid, supported version of Ansible Galaxy. 
 
 
-https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html#installing-ansible
+## Some bits of advice
+Ansible, like any IT technology, has best practices. You can develop your own over time, but I would like to share mine here:
 
-## 5 How To Install and Configure Ansible on Ubuntu 20.04
+1. Start using Ansible. You can only master it when using it.
+2. If you are the designer or the architect of the automation chain, although you are starting in small steps, always consider the future and what you need to do from day one to be ready when your automation chain gets bigger.
+3. If you are writing playbooks to automate tasks, always think simple and search Ansible Galaxy. If you see what you're doing is too complex, then you're moving in the wrong direction because you won't be able to maintain it in the future.
+4. Automation is not a one-person show in the sense that you have other people working with you, so write your playbooks in a clear, descriptive way, and use SCM systems for version control.
 
-* One Ansible Control Node
-* A non-root user with sudo privileges.
-* An SSH keypair associated with this user
+## Resources to learn
 
-https://www.digitalocean.com/community/tutorials/how-to-install-and-configure-ansible-on-ubuntu-20-04
+* Ansible 101 - Episode 1 - Introduction to Ansible, https://www.youtube.com/watch?v=goclfp6a2IQ
+* https://docs.ansible.com/ansible/2.8/user_guide/index.html
 
-## 6 Ansible module and version matrix
+
+https://www.redhat.com/sysadmin/how-start-ansible
+
+
+
+##  Ansible module and version matrix
 
 Ansible modules for Azure
 
@@ -106,7 +97,7 @@ Ansible modules for Azure
 
 https://learn.microsoft.com/en-us/azure/developer/ansible/module-version-matrix
 
-## 7 Ansibel on Azure documentation
+## Ansibel on Azure documentation
 
 Using Ansible with Azure
 
@@ -125,17 +116,6 @@ Common Playbook Issues
 * Indentation, space not tabs
 
 https://www.tutorialspoint.com/ansible/ansible_troubleshooting.htm
-
-## Red Hat Enterprise Linux Automation with Ansible (RH294)
-
-* Install Red Hat Ansible Automation Platform on control nodes.
-* Create and update inventories of managed hosts and manage connections to them.
-* Automate administration tasks with Ansible Playbooks and ad hoc commands.
-* Write effective playbooks at scale.
-* Protect sensitive data used by Ansible Automation Platform with Ansible Vault.
-* Reuse code and simplify playbook development with Ansible Roles and Ansible Content Collections.
-
-https://www.redhat.com/en/services/training/rh294-red-hat-linux-automation-with-ansible
 
 ## Playbook Keywords
 
