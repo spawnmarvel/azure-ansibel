@@ -117,9 +117,13 @@ Common Playbook Issues
 
 https://www.tutorialspoint.com/ansible/ansible_troubleshooting.htm
 
-## Playbook Keywords
+## Ansible Azure.Azcollection
 
-https://docs.ansible.com/ansible/latest/reference_appendices/playbooks_keywords.html
+https://docs.ansible.com/ansible/latest/collections/azure/azcollection/index.html
+
+azure.azcollection.azure_rm_virtualmachine module – Manage Azure virtual machines
+
+https://docs.ansible.com/ansible/latest/collections/azure/azcollection/azure_rm_virtualmachine_module.html#azure-rm-virtualmachine-module
 
 ## SPN Azure
 
@@ -148,6 +152,10 @@ Create an Azure service principal with Azure PowerShell
 
 https://learn.microsoft.com/en-us/powershell/azure/create-azure-service-principal-azureps?view=azps-10.4.1
 
+
+## Ansible Playbook Keywords
+
+https://docs.ansible.com/ansible/latest/reference_appendices/playbooks_keywords.html
 
 ## Commands
 General:
