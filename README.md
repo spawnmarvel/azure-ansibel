@@ -195,7 +195,7 @@ ansible-playbook main.yml
 ansible-playbook create-vm/main.yml
 
 # Connect to it
-ssh username@<ip_address-remote> -i /home/username/.ssh/id_rsa
+ssh username@<ip_address-remote> -i /home/username/.ssh/authorized_keys
 
 ```
 Vars and parameters
