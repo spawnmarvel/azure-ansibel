@@ -180,6 +180,7 @@ https://docs.ansible.com/ansible/latest/reference_appendices/playbooks_keywords.
 ## Getting started
 
 ![Topology]()
+
 https://docs.ansible.com/ansible/latest/getting_started/index.html
 
 ## Commands
