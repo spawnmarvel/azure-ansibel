@@ -121,7 +121,7 @@ https://www.tutorialspoint.com/ansible/ansible_troubleshooting.htm
 
 https://docs.ansible.com/ansible/latest/reference_appendices/playbooks_keywords.html
 
-## Commands
+## SPN Azure
 
 Create Azure credentials
 
@@ -148,6 +148,8 @@ Create an Azure service principal with Azure PowerShell
 
 https://learn.microsoft.com/en-us/powershell/azure/create-azure-service-principal-azureps?view=azps-10.4.1
 
+
+## Commands
 General:
 
 ```bash
