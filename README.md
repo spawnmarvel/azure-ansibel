@@ -263,6 +263,36 @@ Delete an Azure resource group
 ```bash
 ansible-playbook delete_rg.yml --extra-vars "name=Rg-test89x"
 ```
+Inventory and ansible.cfg
 
+```bash
+mkdir project1
+cd project1
+
+touch inventory
+sudo nano inventory
+
+# [myhosts]
+# 20.77.101.194
+
+# i= inventory, m= module and user
+ansible -i inventory myhosts -m ping -u imsdal
+
+# Local ansible.cfg
+sudo nano ansible.cfg 
+# [defaults]
+# INVENTORY = inventory
+
+ansible myhosts -m ping -u imsdal
+
+ansible --version
+# ansible 2.10.8
+# config file = None
+
+# If you installed ansible using pip you should create the configuration file manually.
+# /etc/ansible/ansible.cfg
+# https://docs.ansible.com/archive/ansible/2.4/intro_configuration.html#:~:text=cfg%20should%20be%20present%20in,override%20default%20settings%20in%20Ansible.
+
+```
 
 
