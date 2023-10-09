@@ -189,7 +189,7 @@ General:
 ```bash
 # No params just make some files on the control node
 
-ansible-playbook run_cmd.yml
+ansible-playbook main.yml
 
 # Create a vm, no paramter, all in the file.
 ansible-playbook create-vm/main.yml
