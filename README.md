@@ -3,7 +3,7 @@ Testing and learning Ansibel with Azure
 
 ## Got automation? Here's a quick guide to get you up to speed on Ansible
 
-Ansible modules
+### Ansible modules
 
 * Online: By searching Ansible documentation, https://docs.ansible.com/
 
@@ -12,7 +12,7 @@ Ansible modules
 # Here, you are searching on how to use a module called file.
 ansible-doc file
 ```
-Ansible and Python
+### Ansible and Python
 
 * Ansible is heavily dependent on Python. Most of the modules are coded with Python. Also, the target Linux-based system must have Python installed to start automating tasks using Ansible.
 
@@ -21,20 +21,20 @@ Ansible Engine vs. Ansible Tower
 * Ansible is meant to be used by different DevOps teams. Ansible Tower allows many teams to execute automation tasks from a centralized location that permits RBAC, logging of executed tasks, a GUI to run tasks, and more features. 
 
 
-Which Ansible approach?
+### Which Ansible approach?
 
 * Ad-hoc is a way to send a single Ansible task to the target system(s). You can see this by running a command on a remote system using SSH or legacy rsh
 * Ansible Plays are collections of different files in YAML format, which will run on one or more target systems. These plays are written in a file called a playbook.
 
 YAML Ain't Markup Language, (YAML) is the format in which Ansible playbooks are written. 
 
-Files
+### Files
 
-Playbook
+### Playbook
 
 * A playbook is a file written in YAML format which contains tasks to be executed on the target system(s). Tasks that target the same systems are usually grouped in a play, and a playbook can contain one or more plays. Ansible engine executes the tasks from the top of the file down.
 
-Inventory
+### Inventory
 
 * Ansible Inventory is a file that identifies your target system(s). You can create groups within your inventory to organize your systems.
 * Static Inventories: Files for static inventories can be written in either INI or YAML formats, and you can have more than one inventory file. You can specify which one to use by typing -i path in the command file.
@@ -44,32 +44,32 @@ Inventory
 ```
 * Dynamic Inventories: A dynamic inventory is a script that will execute to get the targeted system(s) each time you run your playbook. This is useful when you are running your playbook targeting systems deployed in the cloud, and every time you have more (or less) system(s), for the playbook to target.
 
-Ansible.cfg
+### Ansible.cfg
 
 * Ansible.cfg is the Ansible configuration file. It is in INI format. Usually, it is saved in /etc/ansible/ansible.cfg. It controls system-wide Ansible settings. 
 * However, you might need to change one or more settings for your specific project (i.e., changing the format of stdout on the screen from JSON to YAML). 
 * You can create your own ansible.cfg file and place it in the project directory where you are changing only the setting you want to overwrite.
 
-Variable files
+### Variable files
 
 * Variables in Ansible are an important subject, and require time to understand and practice. You can define variables in more than 20 locations. You must understand variable precedence to pick up the proper location.
 
-Roles
+### Roles
 
 * The main goals of automation are to minimize manual tasks and speed up deployment activities. 
 * If you have one or more tasks that you are doing often during different plays and want to keep them in a shared location and reference them when needed, then Ansible Roles will help you.
 
-Ansible Galaxy
+### Ansible Galaxy
 
 * Ansible Galaxy is a community platform where you can download extra tools for Ansible, additional modules, roles, and playbooks. If you are new to Ansible, remember that Ansible has a vast community. 
 * For almost every case you want to solve with Ansible, someone else in the community has probably thought about it and uploaded it to Ansible Galaxy
 
-Automation Hub
+### Automation Hub
 
 * Automation Hub can be seen as the paid, supported version of Ansible Galaxy. 
 
 
-## Some bits of advice
+###  Some bits of advice
 Ansible, like any IT technology, has best practices. You can develop your own over time, but I would like to share mine here:
 
 1. Start using Ansible. You can only master it when using it.
@@ -87,7 +87,7 @@ https://www.redhat.com/sysadmin/how-start-ansible
 
 
 
-##  Ansible module and version matrix
+## Ansible module and version matrix
 
 Ansible modules for Azure
 
