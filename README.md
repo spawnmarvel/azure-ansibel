@@ -139,6 +139,11 @@ export AZURE_SECRET=$sp.PasswordCredentials.SecretText
 export AZURE_TENANT=Default Directory | Overview
 
 ```
+
+Get Started: Configure Ansible on an Azure VM
+
+https://learn.microsoft.com/en-us/azure/developer/ansible/install-on-linux-vm?tabs=azure-cli
+
 Create an Azure service principal with Azure PowerShell
 
 https://learn.microsoft.com/en-us/powershell/azure/create-azure-service-principal-azureps?view=azps-10.4.1
