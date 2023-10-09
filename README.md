@@ -179,7 +179,7 @@ https://docs.ansible.com/ansible/latest/reference_appendices/playbooks_keywords.
 
 ## Getting started
 
-![Topology]()
+![Topology](https://github.com/spawnmarvel/azure-ansibel/blob/main/images/topology.jpg)
 
 https://docs.ansible.com/ansible/latest/getting_started/index.html
 
