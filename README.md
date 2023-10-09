@@ -202,6 +202,7 @@ Vars and parameters
 
 ```yaml
 # Every yml file starte with ---
+# create_file.yml 
 ---
 - hosts: localhost
   connection: local
@@ -209,19 +210,20 @@ Vars and parameters
     file_name: myfile.txt
   tasks:
     - name: Create an empty file if it does not exist
-      file: # File module
+      file: # File module, use modules, then you can log and flag it
         path: "{{ file_name }}"
         state: touch
 ```
 ```bash
 # Run the create file
-ansible-playbook main_file_module.yml 
+ansible-playbook create_file.yml 
 ```
 
 Create an Azure resource group
 
 ```yaml
 # Every yml file starte with ---
+# create_rg.yml
 ---
 - hosts: localhost
   connection: local
@@ -237,13 +239,14 @@ Create an Azure resource group
 
 ```bash
 # Run the create rg
-ansible-playbook rg.yml --extra-vars "name=Rg-test-89x location=uksouth"
+ansible-playbook create_rg.yml --extra-vars "name=Rg-test-89x location=uksouth"
 ```
 
 Delete an Azure resource group
 
 ```yaml
 # Every yml file starte with ---
+# delete_rg.yml
 ---
 - hosts: localhost
   connection: local
@@ -258,7 +261,7 @@ Delete an Azure resource group
 ```
 
 ```bash
-ansible-playbook del_rg.yml --extra-vars "name=Rg-test89x"
+ansible-playbook delete_rg.yml --extra-vars "name=Rg-test89x"
 ```
 
 
