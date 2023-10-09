@@ -165,12 +165,11 @@ General:
 
 ansible-playbook run_cmd.yml
 
-# Create a vm, no parma, plain file
-ansible-playbook main.yml
+# Create a vm, no paramter, all in the file.
+ansible-playbook create-vm/main.yml
 
 # Connect to it
 ssh username@<ip_address-remote> -i /home/username/.ssh/id_rsa
-
 
 ```
 Vars and parameters
