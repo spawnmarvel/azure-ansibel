@@ -5,12 +5,20 @@ Testing and learning Ansibel with Azure
 
 Linux, SSH
 
-* Set up SSH connections so Ansible can connect to the managed nodes.
-* Add your public SSH key to the authorized_keys file on each remote system.
+* Step 1: Set up SSH connections so Ansible can connect to the managed nodes.
+* Step 2: Add your public SSH key to the authorized_keys file on each remote system.
+* Step 3: Test Connection
 
 Windows, This document discusses the setup that is required before Ansible can communicate with a Microsoft Windows host.
 
 https://docs.ansible.com/ansible/latest/os_guide/windows_setup.html
+
+* Step 1: Setting up WinRM
+* Step 2: Install Pywinrm
+* Step 3: Set Up Your Inventory File Correctly
+* Step 4: Test Connection
+
+https://www.ansible.com/blog/connecting-to-a-windows-host
 
 ### Ansible modules
 
