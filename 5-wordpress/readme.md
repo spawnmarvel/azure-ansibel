@@ -310,7 +310,7 @@ API
 can not edit to Post name from Plain then Not Found https://20.0.76.5/wp-json/wp/v2/posts
 
 
-add to ssl section
+add to ssl section also
 
 ```bash
 
