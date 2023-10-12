@@ -82,7 +82,7 @@ Redirect / https://20.0.76.5
    ServerName 20.0.76.5
    DocumentRoot /var/www/test
 
-   <Directory /var/www/html/wordpress/>
+   <Directory /var/www/test/>
     Options FollowSymLinks
     AllowOverride All
     Require all granted
