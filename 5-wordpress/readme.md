@@ -9,6 +9,8 @@ If you are using two:
 * Install maridb server and client on db server
 * Configure mariadb with allow remote
 
+Note: Replace all IP with you IP.
+
 ## Install apache2
 
 ```bash
@@ -22,15 +24,21 @@ sudo ufw status
 
 sudo apt install apache2 -y
 
+# check sites enabled
+# /etc/apache2/sites-enabled
+ls
+000-default.conf
+
 sudo a2enmod ssl
 
-sudo systemctl enable apache2
-
 sudo systemctl restart apache2
+
+sudo systemctl enable apache2
 
 sudo service apache2 status
 
 # visit
+# 20.0.76.5 
 # http://ip = Apache2 Default Page
 
 ```
@@ -40,23 +48,28 @@ sudo service apache2 status
 ```bash
 sudo openssl req -x509 -nodes -days 3650 -newkey rsa:2048 -keyout /etc/ssl/private/apache-selfsigned.key -out /etc/ssl/certs/apache-selfsigned.crt
 
+Common Name (e.g. server FQDN or YOUR name) []:20.0.76.5 
+
 # backup default, make a copy
 cd /etc/apache2/sites-available
-cp default-ssl.conf default-ssl.conf_bck
+
+# Current
+ls
+000-default.conf  default-ssl.conf
 
 #cd out
-sudo nano /etc/apache2/sites-available/default-ssl.conf
+sudo nano /etc/apache2/sites-available/default-ssl2.conf
 
-# Paste
+# make new content
 
 <VirtualHost *:80>
 ServerAdmin admin@example.com
 DocumentRoot /var/www/test
-ServerName IP
+ServerName 20.0.76.5
 ServerAlias www.example.com
-Redirect / https://IP
+Redirect / https://20.0.76.5
 
-<Directory /var/www/test/>
+  <Directory /var/www/test/>
     Options FollowSymLinks
     AllowOverride All
     Require all granted
@@ -66,7 +79,7 @@ Redirect / https://IP
 </VirtualHost>
 
 <VirtualHost *:443>
-   ServerName IP
+   ServerName 20.0.76.5
    DocumentRoot /var/www/test
 
    SSLEngine on
@@ -81,8 +94,7 @@ sudo nano /var/www/test/index.html
 # Paste
 # <h1>HTTPS it worked!</h1>
 
-# Check if this is default enabled?
-# sudo a2ensite default-ssl.conf
+sudo a2ensite default-ssl2.conf
 
 sudo apache2ctl configtest
 # Syntax OK
@@ -90,22 +102,144 @@ sudo apache2ctl configtest
 sudo systemctl reload apache2
 sudo service apache2 status
 
+
+# /etc/apache2/sites-enabled
+# 000-default.conf  default-ssl2.conf
+
 # Vist
 
-# http://IP = HTTPS it worked!
+# http://20.0.76.5/ = HTTPS it worked! redirected
 
-# https://IP = HTTPS it worked!
+# https://20.0.76.5/ = HTTPS it worked!
 
 # View cert
-# Common Name IP
-# Validity, Not After, Fri, 07 Oct 2033 17:52:30 GMT
+# Common Name 20.0.76.5
+# Validity, Not After Sun, 09 Oct 2033 15:40:58 GMT
 
 
 ```
 
-## Install php, mariadb etc
+## Install php
+
+
+```bash
+sudo apt install -y php php-{common,mysql,xml,xmlrpc,curl,gd,imagick,cli,dev,imap,mbstring,opcache,soap,zip,intl}
+
+php -v
+
+```
+
+
+## mariadb etc
+
+```bash
+sudo apt install mariadb-server mariadb-client -y
+
+sudo systemctl enable --now mariadb
+
+sudo mysql_secure_installation
+
+# enter, n, n, y, y, y, y
+
+sudo mysql 
+
+CREATE USER 'johndoe'@'%' IDENTIFIED BY 'password';
+
+CREATE DATABASE db_wordpress;
+
+GRANT ALL PRIVILEGES ON *.* TO 'username'@'%' WITH GRANT OPTION;
+
+FLUSH PRIVILEGES;
+
+Select * from mysql.user;
+
+show databases;
+
+exit;
+
+```
 
 ## Install wordpress
+
+```bash
+sudo apt install wget unzip -y
+
+wget https://wordpress.org/latest.zip
+
+sudo unzip latest.zip
+
+sudo mv wordpress/ /var/www/html/
+
+sudo chown www-data:www-data -R /var/www/html/wordpress/
+
+sudo chmod -R 755 /var/www/html/wordpress/
+
+# backup default-ssl2.conf
+
+cd /etc/apache2/sites-available
+
+sudo cp default-ssl2.conf default-ssl2.conf_bck
+
+ls
+
+000-default.conf  default-ssl.conf  default-ssl2.conf  default-ssl2.conf_bck
+
+# Now edit to wordpress folder
+
+<VirtualHost *:80>
+ServerAdmin admin@example.com
+DocumentRoot /var/www/html/wordpress
+ServerName 20.0.76.5
+ServerAlias www.example.com
+Redirect / https://20.0.76.5
+
+  <Directory /var/www/html/wordpress/>
+    Options FollowSymLinks
+    AllowOverride All
+    Require all granted
+   </Directory>
+   ErrorLog ${APACHE_LOG_DIR}/error.log
+   CustomLog ${APACHE_LOG_DIR}/access.log combined
+</VirtualHost>
+
+<VirtualHost *:443>
+   ServerName 20.0.76.5
+   DocumentRoot /var/www/html/wordpress
+
+   SSLEngine on
+   SSLCertificateFile /etc/ssl/certs/apache-selfsigned.crt
+   SSLCertificateKeyFile /etc/ssl/private/apache-selfsigned.key
+</VirtualHost>
+
+
+sudo a2ensite default-ssl2.conf
+
+sudo a2enmod rewrite
+
+sudo apache2ctl configtest
+# Syntax OK
+
+sudo systemctl restart apache2
+
+# Vist
+# http://20.0.76.5/ redirect to https://20.0.76.5/wp-admin/setup-config.php
+
+# Setup
+english
+db_wordpress
+johndoe
+password
+
+# Run the installation
+Welcome
+test123 (site name)
+user-for-wp
+password-for-user
+some@gmail.com
+
+
+
+```
 
 ## Test site
 
