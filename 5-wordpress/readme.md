@@ -193,13 +193,13 @@ ls
 # Now edit to wordpress folder
 
 <VirtualHost *:80>
-ServerAdmin admin@example.com
+ServerAdmin admin@example.com       
 DocumentRoot /var/www/html/wordpress
 ServerName 20.0.76.5
 ServerAlias www.example.com
-Redirect / https://20.0.76.5
+ Redirect / https://20.0.76.5       
 
-  <Directory /var/www/html/wordpress/>
+<Directory /var/www/html/wordpress/>
     Options FollowSymLinks
     AllowOverride All
     Require all granted
@@ -212,7 +212,7 @@ Redirect / https://20.0.76.5
    ServerName 20.0.76.5
    DocumentRoot /var/www/html/wordpress
 
-   <Directory /var/www/html/wordpress/>
+  <Directory /var/www/html/wordpress/>
     Options FollowSymLinks
     AllowOverride All
     Require all granted
