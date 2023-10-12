@@ -312,6 +312,8 @@ can not edit to Post name from Plain then Not Found https://20.0.76.5/wp-json/wp
 
 add to ssl section
 
+```bash
+
 <Directory /var/www/html/wordpress/>
     Options FollowSymLinks
     AllowOverride All
@@ -320,6 +322,7 @@ add to ssl section
 
    sudo service apache2 reload 
 
+```
 
 
 
