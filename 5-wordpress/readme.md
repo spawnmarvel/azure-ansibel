@@ -54,7 +54,7 @@ ServerAdmin admin@example.com
 DocumentRoot /var/www/test
 ServerName IP
 ServerAlias www.example.com
-Redirect / IP
+Redirect / https://IP
 
 <Directory /var/www/test/>
     Options FollowSymLinks
@@ -81,8 +81,8 @@ sudo nano /var/www/test/index.html
 # Paste
 # <h1>HTTPS it worked!</h1>
 
-
-sudo a2ensite default-ssl.conf
+# Check if this is default enabled?
+# sudo a2ensite default-ssl.conf
 
 sudo apache2ctl configtest
 # Syntax OK
