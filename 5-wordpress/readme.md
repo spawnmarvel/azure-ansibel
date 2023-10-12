@@ -243,6 +243,14 @@ some@gmail.com
 
 ## Test site
 
+View images
+
+Publishing failed. Error message: The response is not a valid JSON response
+https://wordpress.org/plugins/classic-editor/
+
+
+Permalinks Plain 
+
 ## Test API with python
 
 
