@@ -82,6 +82,12 @@ Redirect / https://20.0.76.5
    ServerName 20.0.76.5
    DocumentRoot /var/www/test
 
+   <Directory /var/www/html/wordpress/>
+    Options FollowSymLinks
+    AllowOverride All
+    Require all granted
+   </Directory>
+
    SSLEngine on
    SSLCertificateFile /etc/ssl/certs/apache-selfsigned.crt
    SSLCertificateKeyFile /etc/ssl/private/apache-selfsigned.key
@@ -206,6 +212,12 @@ Redirect / https://20.0.76.5
    ServerName 20.0.76.5
    DocumentRoot /var/www/html/wordpress
 
+   <Directory /var/www/html/wordpress/>
+    Options FollowSymLinks
+    AllowOverride All
+    Require all granted
+   </Directory>
+
    SSLEngine on
    SSLCertificateFile /etc/ssl/certs/apache-selfsigned.crt
    SSLCertificateKeyFile /etc/ssl/private/apache-selfsigned.key
@@ -252,6 +264,91 @@ https://wordpress.org/plugins/classic-editor/
 Permalinks Plain 
 
 ## Test API with python
+
+
+```py
+import requests
+import base64
+import json
+import logging
+
+
+import requests
+import json
+
+def make_post_and_send():
+        data = {
+            "title": "Title for Post 3",
+            "content": "This is the content of my new post",
+            "status": "publish"  # Use "draft" to save the post as a draft
+
+        }
+        try:
+            # Send the HTTP request
+            response = requests.post("https://20.0.76.5/wp-json/wp/v2/posts", auth=("pythonworker", "#### #### #### #### ####"), json=data, verify=False)
+            # Check the response
+            if response.status_code == 201:
+                print("Post created successfully")
+            else:
+                print("Failed to create post: " + response.text)
+        except Exception as ex:
+            logging.error(ex)
+
+make_post_and_send()
+
+```
+
+
+
+
+## You should not meet below. is has been fixed above in virtual host 443
+
+API 
+can not edit to Post name from Plain then Not Found https://20.0.76.5/wp-json/wp/v2/posts
+
+
+
+
+
+/var/www/html/wordpress$ cat .htaccess 
+
+# BEGIN WordPress
+# The directives (lines) between "BEGIN WordPress" and "END WordPress" are
+# dynamically generated, and should only be modified via WordPress filters.
+# Any changes to the directives between these markers will be overwritten.
+
+sudo rm .htaccess 
+
+Go to permalinks and select post and save to generate a new file .htaccess 
+
+cat .htaccess
+
+# BEGIN WordPress
+# The directives (lines) between "BEGIN WordPress" and "END WordPress" are
+# dynamically generated, and should only be modified via WordPress filters.
+# Any changes to the directives between these markers will be overwritten.
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+RewriteBase /
+RewriteRule ^index\.php$ - [L]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . /index.php [L]
+</IfModule>
+
+It takes updates but edit to other then plain is not working.
+
+add to ssl section
+
+<Directory /var/www/html/wordpress/>
+    Options FollowSymLinks
+    AllowOverride All
+    Require all granted
+   </Directory>
+
+   sudo service apache2 reload 
+
 
 
 
