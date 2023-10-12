@@ -310,38 +310,6 @@ API
 can not edit to Post name from Plain then Not Found https://20.0.76.5/wp-json/wp/v2/posts
 
 
-
-
-
-/var/www/html/wordpress$ cat .htaccess 
-
-# BEGIN WordPress
-# The directives (lines) between "BEGIN WordPress" and "END WordPress" are
-# dynamically generated, and should only be modified via WordPress filters.
-# Any changes to the directives between these markers will be overwritten.
-
-sudo rm .htaccess 
-
-Go to permalinks and select post and save to generate a new file .htaccess 
-
-cat .htaccess
-
-# BEGIN WordPress
-# The directives (lines) between "BEGIN WordPress" and "END WordPress" are
-# dynamically generated, and should only be modified via WordPress filters.
-# Any changes to the directives between these markers will be overwritten.
-<IfModule mod_rewrite.c>
-RewriteEngine On
-RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
-RewriteBase /
-RewriteRule ^index\.php$ - [L]
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule . /index.php [L]
-</IfModule>
-
-It takes updates but edit to other then plain is not working.
-
 add to ssl section
 
 <Directory /var/www/html/wordpress/>
