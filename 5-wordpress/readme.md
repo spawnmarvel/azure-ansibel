@@ -258,10 +258,13 @@ some@gmail.com
 View images
 
 Publishing failed. Error message: The response is not a valid JSON response
+
+Install Classic Editor
+
 https://wordpress.org/plugins/classic-editor/
 
 
-Permalinks Plain 
+Permalinks Plain to Post
 
 ## Test API with python
 
