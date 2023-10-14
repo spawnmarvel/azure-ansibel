@@ -321,7 +321,7 @@ def make_post_and_send():
             else:
                 print("Failed to create post: " + response.text)
         except Exception as ex:
-            logging.error(ex)
+            print(ex)
 
 make_post_and_send()
 
