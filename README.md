@@ -247,7 +247,6 @@ Delete an Azure resource group
 ```yaml
 # Every yml file starte with ---
 # delete_rg.yml
----
 - hosts: localhost
   connection: local
   tasks:
@@ -255,6 +254,7 @@ Delete an Azure resource group
       azure_rm_resourcegroup:
         name: "{{ name }}"
         state: absent
+        force_delete_nonempty: true
       register: rg
     - debug:
         var: rg
