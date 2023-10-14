@@ -1,10 +1,10 @@
-# wp
+# Wordpress with HTTPS
 
 ## Steps Wp and API https redirect (self-signed)
 
 All is installed on one host.
 
-If you are using two:
+If you are using two hosts:
 * Install only mariadb client on webserver
 * Install maridb server and client on db server
 * Configure mariadb with allow remote
@@ -26,8 +26,10 @@ sudo apt install apache2 -y
 
 # check sites enabled
 # /etc/apache2/sites-enabled
-ls
-000-default.conf
+# ls
+# 000-default.conf
+# check sistes avaliable
+# 000-default.conf  default-ssl.conf
 
 sudo a2enmod ssl
 
@@ -37,8 +39,8 @@ sudo systemctl enable apache2
 
 sudo service apache2 status
 
-# visit
-# 20.0.76.5 
+# visit, it could take 1 min
+# 20.68.24.16
 # http://ip = Apache2 Default Page
 
 ```
@@ -48,26 +50,19 @@ sudo service apache2 status
 ```bash
 sudo openssl req -x509 -nodes -days 3650 -newkey rsa:2048 -keyout /etc/ssl/private/apache-selfsigned.key -out /etc/ssl/certs/apache-selfsigned.crt
 
-Common Name (e.g. server FQDN or YOUR name) []:20.0.76.5 
+Common Name (e.g. server FQDN or YOUR name) []:20.68.24.16 
 
-# backup default, make a copy
-cd /etc/apache2/sites-available
-
-# Current
-ls
-000-default.conf  default-ssl.conf
-
-#cd out
-sudo nano /etc/apache2/sites-available/default-ssl2.conf
+# make a new config for test
+sudo nano /etc/apache2/sites-available/test_ssl.conf
 
 # make new content
 
 <VirtualHost *:80>
 ServerAdmin admin@example.com
 DocumentRoot /var/www/test
-ServerName 20.0.76.5
+ServerName 20.68.24.16
 ServerAlias www.example.com
-Redirect / https://20.0.76.5
+Redirect / https://20.68.24.16
 
   <Directory /var/www/test/>
     Options FollowSymLinks
@@ -79,7 +74,7 @@ Redirect / https://20.0.76.5
 </VirtualHost>
 
 <VirtualHost *:443>
-   ServerName 20.0.76.5
+   ServerName 20.68.24.16
    DocumentRoot /var/www/test
 
    <Directory /var/www/test/>
@@ -93,14 +88,16 @@ Redirect / https://20.0.76.5
    SSLCertificateKeyFile /etc/ssl/private/apache-selfsigned.key
 </VirtualHost>
 
+# make test folder
 sudo mkdir /var/www/test
 
+# make test page
 sudo nano /var/www/test/index.html
 
-# Paste
+# Paste in index
 # <h1>HTTPS it worked!</h1>
 
-sudo a2ensite default-ssl2.conf
+sudo a2ensite test_ssl.conf
 
 sudo apache2ctl configtest
 # Syntax OK
@@ -109,22 +106,21 @@ sudo systemctl reload apache2
 sudo service apache2 status
 
 
-# /etc/apache2/sites-enabled
-# 000-default.conf  default-ssl2.conf
+# cd /etc/apache2/sites-enabled
+# ls
+# 000-default.conf  test_ssl.conf
 
 # Vist
 
-# http://20.0.76.5/ = HTTPS it worked! redirected
+# http://20.68.24.16/ = HTTPS it worked! redirected
 
-# https://20.0.76.5/ = HTTPS it worked!
+# https://20.68.24.16/ = HTTPS it worked!
 
 # View cert
-# Common Name 20.0.76.5
+# Common Name 20.68.24.16
 # Validity, Not After Sun, 09 Oct 2033 15:40:58 GMT
 
-
 ```
-
 ## Install php
 
 
@@ -134,7 +130,6 @@ sudo apt install -y php php-{common,mysql,xml,xmlrpc,curl,gd,imagick,cli,dev,ima
 php -v
 
 ```
-
 
 ## mariadb etc
 
@@ -149,11 +144,11 @@ sudo mysql_secure_installation
 
 sudo mysql 
 
-CREATE USER 'johndoe'@'%' IDENTIFIED BY 'password';
+CREATE USER 'johndoe'@'%' IDENTIFIED BY 'a-password';
 
 CREATE DATABASE db_wordpress;
 
-GRANT ALL PRIVILEGES ON *.* TO 'username'@'%' WITH GRANT OPTION;
+GRANT ALL PRIVILEGES ON *.* TO 'johndoe'@'%' WITH GRANT OPTION;
 
 FLUSH PRIVILEGES;
 
@@ -180,26 +175,31 @@ sudo chown www-data:www-data -R /var/www/html/wordpress/
 
 sudo chmod -R 755 /var/www/html/wordpress/
 
-# backup default-ssl2.conf
+# check sites avilable
+# ls
+# 000-default.conf  default-ssl.conf  test_ssl.conf
+# check sistes enabled
+# ls
+# 000-default.conf  test_ssl.conf
 
-cd /etc/apache2/sites-available
+# Cat the test_ssl.conf
 
-sudo cp default-ssl2.conf default-ssl2.conf_bck
+cat /etc/apache2/sites-available/test_ssl.conf 
 
-ls
+# Create a configuration file for WordPress
 
-000-default.conf  default-ssl.conf  default-ssl2.conf  default-ssl2.conf_bck
+sudo nano /etc/apache2/sites-available/wordpress.conf
 
-# Now edit to wordpress folder
+# Edit the cat result to point to wp folder and paste it
 
 <VirtualHost *:80>
-ServerAdmin admin@example.com       
+ServerAdmin admin@example.com
 DocumentRoot /var/www/html/wordpress
-ServerName 20.0.76.5
+ServerName 20.68.24.16
 ServerAlias www.example.com
- Redirect / https://20.0.76.5       
+Redirect / https://20.68.24.16
 
-<Directory /var/www/html/wordpress/>
+  <Directory /var/www/html/wordpress/>
     Options FollowSymLinks
     AllowOverride All
     Require all granted
@@ -209,10 +209,10 @@ ServerAlias www.example.com
 </VirtualHost>
 
 <VirtualHost *:443>
-   ServerName 20.0.76.5
+   ServerName 20.68.24.16
    DocumentRoot /var/www/html/wordpress
 
-  <Directory /var/www/html/wordpress/>
+   <Directory /var/www/html/wordpress/>
     Options FollowSymLinks
     AllowOverride All
     Require all granted
@@ -223,53 +223,79 @@ ServerAlias www.example.com
    SSLCertificateKeyFile /etc/ssl/private/apache-selfsigned.key
 </VirtualHost>
 
+# enable the site
 
-sudo a2ensite default-ssl2.conf
+sudo a2ensite wordpress.conf
 
 sudo a2enmod rewrite
 
 sudo apache2ctl configtest
-# Syntax OK
+
+# disbale test test ssl and default
+
+sudo a2dissite test_ssl.conf
+
+sudo a2dissite 000-default.conf
 
 sudo systemctl restart apache2
 
 # Vist
-# http://20.0.76.5/ redirect to https://20.0.76.5/wp-admin/setup-config.php
-
-# Setup
-english
-db_wordpress
-johndoe
-password
-
-# Run the installation
-Welcome
-test123 (site name)
-user-for-wp
-password-for-user
-some@gmail.com
-
-
+# http://20.68.24.16/ redirect to https://20.68.24.16/wp-admin/setup-config.php
 
 ```
 
+## Setup wordpress
+Properties
+* english
+* db_wordpress
+* johndoe
+* a-password
+
+Run the installation
+* Welcome
+* test123 (site name)
+* user-for-wp-01
+* password-for-user-01
+* some@gmail.com
+
 ## Test site
 
-View images
+* Site health
+* Https ULR and set permalinks
+* Install Twenty 16, activate it, create some categorys, Customer and Expired and some postes
+* Install plugin Install Classic Editor and install the theme IKnowledgebase
+* Create a home page with template Home Page and create a post page
+* Create some posts and navigate through the site to see that ULR's and navigation is success
+* Enable future press plugin and test expired, set all posts default to 1 year.
+* !!! Select whether the PublishPress Future is enabled for all new posts = Active and Enabled
+* Make a new post and test it from the future settings, run job
 
-Publishing failed. Error message: The response is not a valid JSON response
-
-Install Classic Editor
-
-https://wordpress.org/plugins/classic-editor/
+## Test API
 
 
-Permalinks Plain to Post
+https://20.68.24.16/wp-json/wp/v2/posts
 
-## Test API with python
+* Create a user for API
+* python worker
+* some-password-yes-789
+* Role Editor
+* Now go to the user and create a Application password
+* TheAppPassword01
+* You get the token back
 
+Run the code to create a post with Python
 
 ```py
+
+import requests
+import base64
+import json
+import logging
+
+
+import requests
+import json
+
 import requests
 import base64
 import json
@@ -281,14 +307,14 @@ import json
 
 def make_post_and_send():
         data = {
-            "title": "Title for Post 3",
-            "content": "This is the content of my new post",
+            "title": "Autogenerated from Python",
+            "content": "This was created with code towards the API",
             "status": "publish"  # Use "draft" to save the post as a draft
 
         }
         try:
             # Send the HTTP request
-            response = requests.post("https://20.0.76.5/wp-json/wp/v2/posts", auth=("pythonworker", "#### #### #### #### ####"), json=data, verify=False)
+            response = requests.post("https://20.68.24.16/wp-json/wp/v2/posts", auth=("pythonworker", "THE-TOKEN-GOES-HERE WITH SPACES"), json=data, verify=False)
             # Check the response
             if response.status_code == 201:
                 print("Post created successfully")
@@ -301,28 +327,9 @@ make_post_and_send()
 
 ```
 
+## Restart the server
 
-
-
-## You should not meet below. is has been fixed above in virtual host 443
-
-API 
-can not edit to Post name from Plain then Not Found https://20.0.76.5/wp-json/wp/v2/posts
-
-
-add to ssl section also
-
-```bash
-
-<Directory /var/www/html/wordpress/>
-    Options FollowSymLinks
-    AllowOverride All
-    Require all granted
-   </Directory>
-
-   sudo service apache2 reload 
-
-```
+Check that everything is ok
 
 
 
