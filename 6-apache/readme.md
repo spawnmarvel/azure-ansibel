@@ -40,7 +40,9 @@ Create it on the vm pub ip
 
 vm-uksqa13.uksouth.cloudapp.azure.com
 
-http://vm-uksqa13.uksouth.cloudapp.azure.com/ = = Apache2 Default Page
+Visit
+
+http://vm-uksqa13.uksouth.cloudapp.azure.com/ = Apache2 Default Page
 
 
 ## Virtual host
