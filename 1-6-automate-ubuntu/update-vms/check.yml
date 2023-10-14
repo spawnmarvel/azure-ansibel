@@ -1,0 +1,14 @@
+---
+- hosts: servers
+  become: true
+  become_user: root
+  tasks:
+    - name: Update apt repo and cache on all Debian/Ubuntu boxes
+      apt: update_cache=yes force_apt_get=yes cache_valid_time=3600
+
+    - name: List packages than can be upgraded
+      command: apt list --upgradable
+      register: updates
+
+    - name: List updates
+      debug: var=updates.stdout_lines
