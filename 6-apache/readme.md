@@ -132,7 +132,7 @@ Successfully deployed certificate for vm-uksqa13.uksouth.cloudapp.azure.com to /
 Congratulations! You have successfully enabled HTTPS on https://vm-uksqa13.uksouth.cloudapp.azure.com
 
 
-# Apache did all the updates?
+# Apache did all the updates to correct config file and did a backup also.
 
 cd /etc/apache2/sites-available
 ls
