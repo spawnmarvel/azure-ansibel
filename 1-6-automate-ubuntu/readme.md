@@ -146,3 +146,35 @@ https://www.ntweekly.com/2021/04/13/check-available-update-on-ubuntu-server-with
 ```bash
 ansible-playbook -i inventory check.yml
 ```
+## Connect to an existing vm and transfer public key
+
+Let's assume we take over some vm's, so we will simulate this with creating a vm and add the public key to remote vm.
+
+All up to now has been from 1-3-az-create-linux-vm created with ansible and copied over the public key.
+
+```yaml
+ - name: Create VM
+    azure_rm_virtualmachine:
+      resource_group: ResourceGroup1
+      name: vm-uksqa13
+      vm_size: Standard_B2s
+      managed_disk_type: StandardSSD_LRS
+      os_disk_name: vm-uksqa13_os_disk
+      admin_username: imsdal
+      ssh_password_enabled: false
+      ssh_public_keys:
+        - path: /home/imsdal/.ssh/authorized_keys
+          key_data: "ssh-rsa [...] Q== imsdal@vmname"
+      network_interfaces: nic12
+      image:
+        offer: 0001-com-ubuntu-server-jammy
+        publisher: Canonical
+        sku: '22_04-lts'
+        version: latest
+```
+
+```bash
+```
+
+https://www.linkedin.com/pulse/setup-ssh-key-secure-communication-simplify-ansible-sanju-debnath
+
