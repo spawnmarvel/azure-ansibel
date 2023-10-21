@@ -142,7 +142,7 @@ touch authorized_keys
 # Then copy authorized_keys.pub from the Ansible control node  
 cat authorized_keys.pub
 
-# Then paste it in the file on new vm-uksqa12
+# Then paste it in the file on vm-remote
 sudo nano authorized_keys
 
 # Set chmod, So that you don't mess up other permissions already on the file, use the flag +, such as via
