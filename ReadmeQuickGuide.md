@@ -52,16 +52,16 @@ ansible-playbook myplaybook.yml --private-key=~/.ssh/custom_id
 Assuming the following was done on controll node
 
 ```bash
-cd /home/username/.ssh/
+cd /home/imsdal/.ssh/
 ls
 # authorized_keys
 
 ssh-keygen -m PEM -t rsa -b 4096
 
 # When prompted, specify the files to be created in the following directory
-/home/username/.ssh/authorized_keys
+/home/imsdal/.ssh/authorized_keys
 
-cd /home/username/.ssh
+cd /home/imsdal/.ssh
 
 ls
 # authorized_keys  authorized_keys.pub
@@ -80,10 +80,10 @@ Sub section create VM
       vm_size: Standard_B2s
       managed_disk_type: StandardSSD_LRS
       os_disk_name: vm-uksqa13_os_disk
-      admin_username: username
+      admin_username: imsdal
       ssh_password_enabled: false
       ssh_public_keys:
-        - path: /home/username/.ssh/authorized_keys
+        - path: /home/imsdal/.ssh/authorized_keys
           key_data: "ssh-rsa [......]"
       network_interfaces: nic12
       image:
@@ -95,7 +95,7 @@ Sub section create VM
 SSH connect
 
 ```bash
-ssh username@10.10.10.12 -i /home/username/.ssh/authorized_keys 
+ssh imsdal@10.10.10.12 -i /home/imsdal/.ssh/authorized_keys 
 
 ```
 
@@ -103,7 +103,7 @@ ssh username@10.10.10.12 -i /home/username/.ssh/authorized_keys
 ## Using a Custom SSH key on a existing VM
 
 ```bash
-# Login with a the user you got from someone to test ssh
+# Login with the user you got from someone to test ssh
 ssh username@10.10.10.12
 # username@vm-remote:~$ 
 
@@ -118,7 +118,7 @@ authorized_keys  authorized_keys.pub  known_hosts  known_hosts.old
 # authorized_keys is the private key
 # authorized_keys.pub is the public key, we need to move it
 
-# Login with a the user you got from someone to verify that the current user has authorized_keys file
+# Login with the user you got from someone to verify that the current user has authorized_keys file
 ssh username@10.10.10.12
 # username@vm-remote:~$
 
@@ -126,7 +126,8 @@ cd /home/username/.ssh/
 ls
 authorized_keys
 
-# Now we need to create our Ansible user
+# Now we need to create our Ansible user and the authorized_keys file
+# We create with the same username as on our control node
 cd
 sudo su -
 adduser imsdal
@@ -139,7 +140,7 @@ cd .ssh
 
 touch authorized_keys
 
-# Then copy authorized_keys.pub from the Ansible control node  
+# Then copy authorized_keys.pub from the control node  
 cat authorized_keys.pub
 
 # Then paste it in the file on vm-remote
