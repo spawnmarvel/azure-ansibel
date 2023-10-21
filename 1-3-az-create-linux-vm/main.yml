@@ -1,26 +1,26 @@
 ---
 - name: Create Azure VM
-  hosts: localhost     
-  connection: local    
+  hosts: localhost
+  connection: local
   tasks:
   - name: Create resource group
     azure_rm_resourcegroup:
-      name: ResourceGroup1
+      name: ResourceGroup2
       location: uksouth
   - name: Create virtual network
     azure_rm_virtualnetwork:
-      resource_group: ResourceGroup1
+      resource_group: ResourceGroup2
       name: vnet12
       address_prefixes: "10.0.0.0/16"
   - name: Add subnet
     azure_rm_subnet:
-      resource_group: ResourceGroup1
+      resource_group: ResourceGroup2
       name: subnet
       address_prefix: "10.0.1.0/24"
       virtual_network: vnet12
   - name: Create public IP address
     azure_rm_publicipaddress:
-      resource_group: ResourceGroup1
+      resource_group: ResourceGroup2
       allocation_method: Static
       name: public-ip12
     register: output_ip_address
@@ -29,7 +29,7 @@
       msg: "The public IP is {{ output_ip_address.state.ip_address }}."
   - name: Create Network Security Group that allows SSH
     azure_rm_securitygroup:
-      resource_group: ResourceGroup1
+      resource_group: ResourceGroup2
       name: network-security-group12
       rules:
         - name: SSH
@@ -40,15 +40,18 @@
           direction: Inbound
   - name: Create virtual network interface card
     azure_rm_networkinterface:
-      resource_group: ResourceGroup1
+      resource_group: ResourceGroup2
       name: nic12
       virtual_network: vnet12
       subnet: subnet
-      public_ip_name: public-ip12
       security_group: network-security-group12
+      ip_configurations:
+        - name: ipconfig1
+          public_ip_address_name: public-ip12
+          primary: True
   - name: Create VM
     azure_rm_virtualmachine:
-      resource_group: ResourceGroup1
+      resource_group: ResourceGroup2
       name: vm-uksqa13
       vm_size: Standard_B2s
       managed_disk_type: StandardSSD_LRS
@@ -57,7 +60,7 @@
       ssh_password_enabled: false
       ssh_public_keys:
         - path: /home/imsdal/.ssh/authorized_keys
-          key_data: "ssh-rsa [...] Q== imsdal@vmname"
+          key_data: "ssh-rsa [......]"
       network_interfaces: nic12
       image:
         offer: 0001-com-ubuntu-server-jammy

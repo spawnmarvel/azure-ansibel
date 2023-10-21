@@ -131,6 +131,10 @@ localhost                  : ok=9    changed=7    unreachable=0    failed=0    s
 
 ```
 
+NOTE: The [DEPRECATION WARNING] is fixed:
+
+https://follow-e-lo.com/2023/10/21/deprecation-warning-setting-ip_configuration-flatten-is-deprecated-and-will-be-removed/
+
 https://learn.microsoft.com/en-us/azure/developer/ansible/vm-configure?tabs=ansible
 
 ## Connect to the VM
