@@ -156,6 +156,8 @@ chown imsdal:imsdal authorized_keys
 ssh imsdal@10.10.10.12 -i /home/imsdal/.ssh/authorized_keys
 
 ```
+## Using Password-Based Authentication
+
 
 https://www.digitalocean.com/community/cheatsheets/how-to-use-ansible-cheat-sheet-guide
 
