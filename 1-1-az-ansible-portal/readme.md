@@ -25,13 +25,12 @@ Test Ansible installation
 
 # Create an Azure resource group
 
-touch create_rg.yml
+touch create_rg.yml, delete_rg.yml, makefiles.yml
 nano create_rg.yml
 
 ```
 
 ```yaml
-# This did not work, MS default
 
 # Every yml file starte with ---
 ---
@@ -41,16 +40,27 @@ nano create_rg.yml
     - name: Creating resource group - "{{ name }}"
       azure_rm_resourcegroup:
         name: "{{ name }}"
-        location: "{{ location }}"
+        location: "{{ location}}"
       register: rg
     - debug:
         var: rg
 
-# Something with indentation I guess.
-
-# This worked
+# Every yml file starte with ---
+---
+- hosts: localhost
+  connection: local
+  tasks:
+    - name: Deleting resource group - "{{ name }}"
+      azure_rm_resourcegroup:
+        name: "{{ name }}"
+        state: absent
+        force_delete_nonempty: true
+      register: rg
+    - debug:
+        var: rg
 
 # Every yml file starte with ---
+---
 - hosts: localhost
   connection: local
   tasks:
@@ -62,15 +72,18 @@ nano create_rg.yml
 Run the playbook using ansible-playbook. Replace the placeholders with the name and location of the resource group to be created.
 
 ```bash
-ansible-playbook create_rg.yml --extra-vars "name=Rg-ansible-101 location=uksouth"
+ansible-playbook create_rg.yml --extra-vars "name=Rg123Test location=uksouth"
 
-# This worked
-ansible-playbook run_cmd.yml
+ansible-playbook delete_rg.yml --extra-vars "name=Rg123Test"
 
+ansible-playbook makefiles.yml
+
+# It created two txt files
+ls
+makefiles.yml  test.txt  test1.txt
 ```
-It created two txt files
 
-![Result 101](https://github.com/spawnmarvel/azure-ansibel/blob/main/images/101.jpg)
+
 
 https://learn.microsoft.com/en-us/azure/developer/ansible/getting-started-cloud-shell?tabs=ansible#next-steps
 

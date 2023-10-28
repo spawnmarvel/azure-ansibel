@@ -62,7 +62,9 @@ https://grafana.com/docs/grafana/latest/setup-grafana/start-restart-grafana/
 
 Build your first dashboard
 
-20.254.49.234:3000
+Open NSG 3000
+
+http.//20.254.49.234:3000
 
 https://grafana.com/docs/grafana/latest/getting-started/build-first-dashboard/
 
