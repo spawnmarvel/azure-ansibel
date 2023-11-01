@@ -53,12 +53,27 @@ ansible-playbook create_vm.yml
 # Rg-ansible-win01
 
 ```
-
-Create a public IP address
+Create the virtual network and subnet
 
 ```yml
-# Add the following tasks to the playbook
+- name: Create virtual network
+    azure_rm_virtualnetwork:
+      resource_group: Rg-ansible-win01
+      name: vNet
+      address_prefixes: "10.0.0.0/16"
 
+  - name: Add subnet
+    azure_rm_subnet:
+      resource_group: Rg-ansible-win01
+      name: subnet
+      address_prefix: "10.0.1.0/24"
+      virtual_network: vNet
+```
+Create a public IP address
+
+Add the following tasks to the playbook
+
+```yml
 - name: Create public IP address
     azure_rm_publicipaddress:
       resource_group: Rg-ansible-win01
@@ -74,6 +89,51 @@ Create a public IP address
 Note
 * Ansible register module is used to store the output from azure_rm_publicipaddress in a variable called output_ip_address.
 * The debug module is used to output the public IP address of the VM to the console.
+
+Create network security group and NIC
+
+To open the winrm and http, add the following to the playbook.
+```yml
+- name: Create Network Security Group
+    azure_rm_securitygroup:
+      resource_group: Rg-ansible-win01
+      name: networkSecurityGroup
+      rules:
+        - name: 'allow_rdp'
+          protocol: Tcp
+          destination_port_range: 3389
+          access: Allow
+          priority: 1001
+          direction: Inbound
+        - name: 'allow_web_traffic'
+          protocol: Tcp
+          destination_port_range:
+            - 80
+            - 443
+          access: Allow
+          priority: 1002
+          direction: Inbound
+        - name: 'allow_powershell_remoting'
+          protocol: Tcp
+          destination_port_range: 
+            - 5985
+            - 5986
+          access: Allow
+          priority: 1003
+          direction: Inbound
+
+  - name: Create a network interface
+    azure_rm_networkinterface:
+      name: nic
+      resource_group: Rg-ansible-win01
+      virtual_network: vNet
+      subnet_name: subnet
+      security_group: networkSecurityGroup
+      ip_configurations:
+        - name: default
+          public_ip_address_name: pip
+          primary: True
+```
 
 
 
