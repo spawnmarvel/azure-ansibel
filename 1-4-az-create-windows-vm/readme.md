@@ -193,5 +193,14 @@ https://github.com/ansible/ansible-documentation/tree/devel/examples/scripts
       settings: '{"fileUris": ["https://github.com/ansible/ansible-documentation/tree/devel/examples/scripts/ConfigureRemotingForAnsible.ps1"],"commandToExecute": "powershell -ExecutionPolicy Unrestricted -File ConfigureRemotingForAnsible.ps1"}'
       auto_upgrade_minor_version: true
 ```
+Note:
+Issue with
+
+az vm extension show --name winrm-extension --vm-name win-wm --resource-group Rg-ansible-win01 --output json
+
+ResourceNotFound) The Resource 'Microsoft.Compute/virtualMachines/win-wm/extensions/winrm-extension' under resource group 'Rg-ansible-win01' was not found.
+
+
+https://learn.microsoft.com/en-us/azure/virtual-machines/extensions/troubleshoot
 
 https://learn.microsoft.com/en-us/azure/developer/ansible/vm-configure-windows?tabs=ansible
