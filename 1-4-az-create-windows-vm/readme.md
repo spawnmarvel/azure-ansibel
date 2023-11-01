@@ -55,6 +55,8 @@ ansible-playbook create_vm.yml
 ```
 Create the virtual network and subnet
 
+Add the following task
+
 ```yml
 - name: Create virtual network
     azure_rm_virtualnetwork:
@@ -134,7 +136,62 @@ To open the winrm and http, add the following to the playbook.
           public_ip_address_name: pip
           primary: True
 ```
+Note
+* A virtual network interface card connects your VM to its virtual network, public IP address, and security group.
+* The azure_rm_securitygroup creates an Azure network security group to allow WinRM traffic from the Ansible server to the remote host by allowing port 5985 and 5986.
+
+Create a virtual machine
+
+Add the following task
+
+```yml
+ - name: Create VM
+   azure_rm_virtualmachine:
+      resource_group: Rg-ansible-win01
+      name: win-vm
+      vm_size: Standard_B2s
+      admin_username: azureuser
+      admin_password: "{{ password }}"
+      network_interfaces: nic
+      os_type: Windows
+      image:
+          offer: WindowsServer
+          publisher: MicrosoftWindowsServer
+          sku: 2019-Datacenter
+          version: latest
+    no_log: true
+```
+The admin_password value of {{ password }} is an Ansible variable that contains the Windows VM password. To securely populate that variable, add a var_prompts entry to the beginning of the playbook.
+
+```yml
+vars_prompt:
+    - name: password
+      prompt: "Enter local administrator password"
+```
+
+Configure the WinRM Listener
+
+To configure WinRM, add the following ext azure_rm_virtualmachineextension:
+
+https://github.com/ansible/ansible/issues/81240
+
+New url
+
+https://github.com/ansible/ansible-documentation/tree/devel/examples/scripts
 
 
+
+```yml
+- name: Create VM script extension to enable HTTPS WinRM listener
+    azure_rm_virtualmachineextension:
+      name: winrm-extension
+      resource_group: Rg-ansible-win01
+      virtual_machine_name: win-vm
+      publisher: Microsoft.Compute
+      virtual_machine_extension_type: CustomScriptExtension
+      type_handler_version: '1.9'
+      settings: '{"fileUris": ["https://github.com/ansible/ansible-documentation/tree/devel/examples/scripts/ConfigureRemotingForAnsible.ps1"],"commandToExecute": "powershell -ExecutionPolicy Unrestricted -File ConfigureRemotingForAnsible.ps1"}'
+      auto_upgrade_minor_version: true
+```
 
 https://learn.microsoft.com/en-us/azure/developer/ansible/vm-configure-windows?tabs=ansible
