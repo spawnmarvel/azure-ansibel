@@ -9,4 +9,6 @@ pip install "pywinrm>=0.3.0"
 
 ```
 
+
+init
 https://learn.microsoft.com/en-us/azure/developer/ansible/vm-configure-windows?tabs=ansible
