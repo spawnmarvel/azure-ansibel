@@ -80,6 +80,9 @@
       resource_group: Rg-ansible-win01
       name: win-vm
       vm_size: Standard_B2s
+      # add disk as managed
+      # https://docs.ansible.com/ansible/latest/collections/azure/azcollection/azure_rm_virtualmachine_module.html
+      managed_disk_type: StandardSSD_LRS
       admin_username: azureuser
       admin_password: "{{ password }}"
       network_interfaces: nic
