@@ -226,6 +226,96 @@ Well, after putting everything in the yml file, it worked:
 ansible-playbook create_vm.yml
 ```
 
+wait for the WinRM connection to finish.
+
+In this case
+
+fatal: [localhost]: FAILED! => {"changed": false, "elapsed": 600, "msg": "Timeout when waiting for 20.117.74.165:5986"}
+
+
+Connect to the Windows virtual machine
+
+Create a new Ansible playbook named connect.yml and copy the following contents into the playbook:
+```yml
+---
+- hosts: all
+  vars_prompt:
+    - name: ansible_password
+      prompt: "Enter local administrator password"
+  vars:
+    ansible_user: azureuser
+    ansible_connection: winrm
+    ansible_winrm_transport: ntlm
+    ansible_winrm_server_cert_validation: ignore
+  tasks:
+
+  - name: Test connection
+    win_ping:
+```
+Run it
+
+```bash
+ansible-playbook connect.yml  -i 20.117.74.165,
+Enter local administrator password:
+```
+
+Timeout or connection refused
+
+```ps1
+New-SelfSignedCertificate -Subject 'CN=ServerB.domain.com' -TextExtension '2.5.29.37={text}1.3.6.1.5.5.7.3.1'
+
+# You get the thumbprint here
+
+winrm create winrm/config/Listener?Address=*+Transport=HTTPS '@{Hostname="ServerB.domain.com"; CertificateThumbprint="tprint"}'
+
+# ResourceCreated
+#    Address = http://schemas.xmlsoap.org/ws/2004/08/addressing/role/anonymous
+#    ReferenceParameters
+#        ResourceURI = http://schemas.microsoft.com/wbem/wsman/1/config/listener
+#        SelectorSet
+#            Selector: Address = *, Transport = HTTPS
+
+# Firewall is default on, this creates a rule to allow 5986
+$FirewallParam = @{
+    DisplayName = 'Windows Remote Management (HTTPS-In)'
+    Direction = 'Inbound'
+    LocalPort = 5986
+    Protocol = 'TCP'
+    Action = 'Allow'
+    Program = 'System'
+}
+New-NetFirewallRule @FirewallParam
+
+```
+
+https://github.com/Orange-Cyberdefense/GOAD/issues/98
+
+
+Run it
+```bash
+ansible-playbook connect.yml  -i 20.117.74.165,
+Enter local administrator password:
+```
+Success
+
+```log
+Enter local administrator password:
+
+PLAY [all] ***********************
+
+TASK [Gathering Facts] ***********
+ok: [20.117.74.165]
+
+TASK [Test connection] ***********
+ok: [20.117.74.165]
+
+PLAY RECAP ***********************
+20.117.74.165              : ok=2    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
+```
+
+
+
+
 https://learn.microsoft.com/en-us/azure/developer/ansible/vm-configure-windows?tabs=ansible
 
 
