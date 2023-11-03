@@ -198,9 +198,34 @@ Issue with:
 
 az vm extension show --name winrm-extension --vm-name win-wm --resource-group Rg-ansible-win01 --output json
 
-ResourceNotFound) The Resource 'Microsoft.Compute/virtualMachines/win-wm/extensions/winrm-extension' under resource group 'Rg-ansible-win01' was not found.
+ResourceNotFound The Resource 'Microsoft.Compute/virtualMachines/win-wm/extensions/winrm-extension' under resource group 'Rg-ansible-win01' was not found.
 
 
 https://learn.microsoft.com/en-us/azure/virtual-machines/extensions/troubleshoot
 
+Well, after putting everything in the yml file, it worked:
+
+```yml
+  - name: Get facts for one Public IP
+    azure_rm_publicipaddress_info:
+      resource_group: Rg-ansible-win01
+      name: pip
+    register: publicipaddresses
+
+  - name: set public ip address fact
+    set_fact: publicipaddress="{{ publicipaddresses | json_query('publicipaddresses[0].ip_address')}}"
+
+  - name: wait for the WinRM port to come online
+    wait_for:
+      port: 5986
+      host: '{{ publicipaddress }}'
+      timeout: 600
+```
+
+```bash
+ansible-playbook create_vm.yml
+```
+
 https://learn.microsoft.com/en-us/azure/developer/ansible/vm-configure-windows?tabs=ansible
+
+
