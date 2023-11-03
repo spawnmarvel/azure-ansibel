@@ -203,7 +203,9 @@ ResourceNotFound The Resource 'Microsoft.Compute/virtualMachines/win-wm/extensio
 
 https://learn.microsoft.com/en-us/azure/virtual-machines/extensions/troubleshoot
 
-Well, after putting everything in the yml file, it worked:
+## Well, after putting everything in the yml file, it worked:
+
+It could also be that the vnet, vm etc was created at the first run.
 
 ```yml
   - name: Get facts for one Public IP
