@@ -402,6 +402,9 @@ ansible winhosts -m win_ping
 
 https://learn.microsoft.com/en-us/azure/developer/ansible/vm-configure-windows?tabs=ansible
 
-## Install IIS
+## Stop a service, bck and edit, then start
 
+* Install rabbitmq just an example
+* Add all config files
+* Use ansible to stop, backup file, edit file and start and verify
 
