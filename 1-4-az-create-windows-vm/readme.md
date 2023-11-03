@@ -379,12 +379,13 @@ The time is the same, timezone
 
 Found it, NTLM.
 
+https://github.com/ansible/ansible/issues/43920
+
+Does NTLM auth work, ansible_winrm_transport: ntlm
+
 Yes, updated inventory with:
 
 ```bash
-# https://github.com/ansible/ansible/issues/43920
-# Does NTLM auth work, ansible_winrm_transport: ntlm
-
 ansible_winrm_transport = ntlm
 
 ansible winhosts -m win_ping -u azureuser
