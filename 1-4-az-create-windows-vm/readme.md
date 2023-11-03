@@ -313,9 +313,88 @@ PLAY RECAP ***********************
 20.117.74.165              : ok=2    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
 ```
 
+Ping windows and configure ansible to use it
+
+
+```bash
+cd create-win
+sudo nano inventory
+cat inventory
+# [myhosts]
+# 20.117.74.165
+
+
+# We must update since it uses defualt ssh, 22
+
+# ansible_connection=winrm to define the connection is not SSH should use winrm
+# ansible_user what ever the username you have created in the windows machine
+# ansible_password password for that user ( the same one you use for RDP)
+# ansible_winrm_server_cert_validation this is fine in DEV/TEST environment to tell ansible to ignore hostkey/server cert validation.
+
+cat inventory
+[winhosts]
+20.117.74.165
+
+[winhosts:vars]
+ansible_connection = winrm
+ansible_user = azureuser
+ansible_password = password
+ansible_winrm_server_cert_validation = ignore
+ansible_port = 5986
+# ansible_winrm_transport = ssl
+
+ansible -i inventory winhosts -m win_ping -u azureuser
+# 20.117.74.165 | UNREACHABLE! => {
+#     "changed": false,
+#    "msg": "ssl: the specified credentials were rejected by the server",
+#     "unreachable": true
+# }
+
+# Make ansible.cfg so we do not need to pass inventory
+sudo nano ansible.cfg
+cat ansible.cfg
+# [defaults]
+# INVENTORY=inventory
+
+ansible winhosts -m win_ping -u azureuser
+ansible winhosts -m win_ping
+# 20.117.74.165 | UNREACHABLE! => {
+#     "changed": false,
+#     "msg": "ssl: the specified credentials were rejected by the server",
+#    "unreachable": true
+# }
+
+
+```
+https://www.middlewareinventory.com/blog/how-to-use-ansible-with-windows-host-ansible-windows-example/
+
+
+https://github.com/ansible/ansible/issues/16478
+
+
+
+Yes, updated inventory with:
+
+```bash
+# https://github.com/ansible/ansible/issues/43920
+# Does NTLM auth work, ansible_winrm_transport: ntlm
+
+ansible_winrm_transport = ntlm
+
+ansible winhosts -m win_ping -u azureuser
+ansible winhosts -m win_ping
+
+# 20.117.74.165 | SUCCESS => {
+#     "changed": false,
+#    "ping": "pong"
+# }
+```
+
 
 
 
 https://learn.microsoft.com/en-us/azure/developer/ansible/vm-configure-windows?tabs=ansible
+
+## Install IIS
 
 
