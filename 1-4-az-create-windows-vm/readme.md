@@ -194,7 +194,7 @@ https://github.com/ansible/ansible-documentation/tree/devel/examples/scripts
       auto_upgrade_minor_version: true
 ```
 Note:
-Issue with
+Issue with:
 
 az vm extension show --name winrm-extension --vm-name win-wm --resource-group Rg-ansible-win01 --output json
 
