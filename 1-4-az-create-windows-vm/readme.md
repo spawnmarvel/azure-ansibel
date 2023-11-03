@@ -373,7 +373,11 @@ https://www.middlewareinventory.com/blog/how-to-use-ansible-with-windows-host-an
 
 https://github.com/ansible/ansible/issues/16478
 
+The user is local admin
 
+The time is the same, timezone
+
+Found it, NTLM.
 
 Yes, updated inventory with:
 
