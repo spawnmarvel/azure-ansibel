@@ -303,32 +303,117 @@ ansible-playbook copy_file.yml
 ```
 
 ## Ansible add content a file on windows
-ansible.windows.win_powershell module – Run PowerShell scripts
+ansible.windows.win_shell module – Execute shell commands on target hosts
 
-https://docs.ansible.com/ansible/latest/collections/ansible/windows/win_powershell_module.html
-
+https://docs.ansible.com/ansible/latest/collections/ansible/windows/win_shell_module.html#ansible-collections-ansible-windows-win-shell-module
 Make add_content.yml
 
 ```yml
 ---
-- name: win_copy module
+- name: win_shell module
   hosts: winhosts
   vars:
      myfile: 'C:\ansible\ansible.log'
   tasks:
-    - name: Run basic PowerShell script
-      ansible.windows.win_powershell:
-        script: |
-          Add-Content C:\ansible\ansible.log "Test"
+    - name: Run basic PowerShell script to log
+      ansible.windows.win_shell: |
+          $d = Get-Date
+          $log = "Ansible worker " + $d
+          Add-Content C:\ansible\ansible.log $log
 
 ```
 
-run it
+run it a few times
 
 ```bash
 ansible-playbook add_content.yml
 
-# file is created
+# file is updated
+# https://follow-e-lo.com/2023/11/04/ansible-winrm-manage-vm/
+
+```
+
+## Ansible Execute a command in the remote shell, stdout goes to the specified file on the remote
+ansible.windows.win_shell module – Execute shell commands on target hosts
+
+https://docs.ansible.com/ansible/latest/collections/ansible/windows/win_shell_module.html#ansible-collections-ansible-windows-win-shell-module
+Make remote_script.yml
+
+```yml
+---
+- name: win_shell module
+  hosts: winhosts
+  vars:
+     myfile: 'C:\ansible\ansible.log'
+  tasks:
+    - name: Run basic PowerShell script remote install iis
+      ansible.windows.win_shell: c:\ansible\install_iis.ps1
+    - name: Check if iis is installed
+      ansible.windows.win_shell: |
+          $d = Get-Date
+          if ((Get-WindowsFeature Web-Server).InstallState -eq "Installed") {
+              $log = "Ansible worker, IIS is installed " + $d
+          } 
+          else {
+               $log = "Ansible worker, IIS is not installed " + $d
+          }
+          Add-Content C:\ansible\ansible.log $log
+
+```
+
+run it a few times
+
+```bash
+ansible-playbook remote_script.yml
+
+# iis is installed
+# https://follow-e-lo.com/2023/11/04/ansible-winrm-manage-vm/
+
+```
+
+## Ansible stop service
+
+ansible.windows.win_service module – Manage and query Windows services
+
+https://docs.ansible.com/ansible/latest/collections/ansible/windows/win_service_module.html
+Make stop_starte_service.yml
+
+```yml
+---
+- name: win_shell module
+  hosts: winhosts
+  vars:
+     myfile: 'C:\ansible\ansible.log'
+  tasks:
+    - name: Stop windows service IIS servicename or display name
+      ansible.windows.win_service:
+         name: W3SVC
+         state: stopped
+    - name: Log service state
+      ansible.windows.win_shell: |
+         $d = Get-Date
+         $state = Get-Service "W3SVC" | Select-Object -Property Status
+         $log = "Ansible worker, Service state " + $state + " " + $d
+         Add-Content C:\ansible\ansible.log $log
+    - name: Stop windows service IIS servicename or display name
+      ansible.windows.win_service:
+         name: W3SVC
+         state: started
+    - name: Log service state
+      ansible.windows.win_shell: |
+         $d = Get-Date
+         $state = Get-Service "W3SVC" | Select-Object -Property Status
+         $log = "Ansible worker, Service state " + $state + " " + $d
+         Add-Content C:\ansible\ansible.log $log
+
+```
+
+run it a few times
+
+```bash
+ansible-playbook stop_start_service.yml
+
+# iis is installed
 # https://follow-e-lo.com/2023/11/04/ansible-winrm-manage-vm/
 
 ```
