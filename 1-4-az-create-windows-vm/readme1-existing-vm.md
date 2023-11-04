@@ -117,9 +117,45 @@ winrm e winrm/config/listener
 #    ListeningOn = 10.0.0.4, 127.0.0.1, ::1, fe80::f126:b629:4b75:1db5%6
 
 ```
+## 9. Add Firewall exception rule for HTTPS
+
+You can skip if you already added HTTPS firewall rule in the previous step-4.
+
+```ps1
+netsh advfirewall firewall add rule name=”WinRM-HTTPS” dir=in localport=5986 protocol=TCP action=allow
+```
+
+## 10. Add Inbound rule for port 5986 and 5985 in azure portal.
+
+We need to add Inbound rule for the HTTP and HTTPS port in the Azure portal for the virtual machine. The virtual machine has its own port defined for HTTP and https – 5985 and 5986 respectively.
+
+## 11. Verify HTTPS connection from source machine and execute command to remote maching.
+
+```ps1
+$username = "vossmann"
+
+$password = ""
+
+$pso = New-PSSessionOption -SkipCACheck
+
+$secpasswd = ConvertTo-SecureString $password -AsPlainText -Force
+
+$credentials = New-Object System.Management.Automation.PSCredential($username, $secpasswd)
+
+$session = New-PSSession -ComputerName "51.11.36.160" -UseSSL -SessionOption $pso -Credential $credentials
+
+$session
+
+# Id Name            ComputerName    ComputerType    State         ConfigurationName     Availability
+# -- ----            ------------    ------------    -----         -----------------     ------------
+#  1 WinRM1          51.11.36.160    RemoteMachine   Opened        Microsoft.PowerShell     Available
+
+```
 
 
 https://techdiksha.com/configuring-winrm-azure-virtual-machine/
+
+## Test winrm with Ansible
 
 ## More info at wiki
 

@@ -2,6 +2,8 @@
 
 ## Connect to existing vm an configure winrm
 
+https://github.com/spawnmarvel/azure-ansible/blob/main/1-4-az-create-windows-vm/readme1-existing-vm.md
+
 ## Stop a service, bck and edit, then start
 
 * Install rabbitmq just an example
