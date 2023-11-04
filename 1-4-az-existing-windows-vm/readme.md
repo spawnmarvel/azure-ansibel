@@ -208,7 +208,14 @@ ansible winhosts -m win_ping
 ```
 # Ansible windows operations
 
-## Ansible create diretory on windows
+Now we are ready to do things on windows with Ansible.
+
+## Ansible create directory on windows
+
+ansible.windows.win_file module – Creates, touches or removes files or directories
+
+https://docs.ansible.com/ansible/latest/collections/ansible/windows/win_file_module.html
+
 
 Make create_dir.yml
 
@@ -229,7 +236,66 @@ Make create_dir.yml
 run it
 
 ```bash
-ansible create_dir.yml
+ansible-playbook -i winhosts create_dir.yml
+
+# folder is created
+# https://follow-e-lo.com/2023/11/04/ansible-winrm-manage-vm/
+
+```
+## Ansible create a file in directory on windows
+
+Make create_dir.yml
+
+```yml
+---
+- name: win_file module make a file
+  hosts: winhosts
+  vars:
+     mydir: 'C:\ansible\ansible.log'
+  tasks:
+    - name: Create a file called ansible.log
+      ansible.windows.win_file:
+        path: "{{ mydir }}"
+        state: touch
+
+```
+
+run it
+
+```bash
+ansible-playbook -i winhosts create_file.yml
+
+# file is created
+# https://follow-e-lo.com/2023/11/04/ansible-winrm-manage-vm/
+
+```
+
+## Ansible add content to a file in directory on windows
+
+Make add_file.yml
+
+```yml
+---
+- name: win_file module make a file
+  hosts: winhosts
+  vars:
+     mydir: 'C:\ansible\ansible.log'
+  tasks:
+    - name: Create a file called ansible.log
+      ansible.windows.win_file:
+        path: "{{ mydir }}"
+        state: touch
+
+```
+
+run it
+
+```bash
+ansible-playbook -i winhosts add_file.yml
+
+# file is created
+# https://follow-e-lo.com/2023/11/04/ansible-winrm-manage-vm/
+
 ```
 
 ## Stop a service, bck and edit, then start

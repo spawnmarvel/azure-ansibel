@@ -1,0 +1,11 @@
+[winhosts]
+51.11.36.160
+
+[winhosts:vars]
+ansible_connection = winrm
+ansible_user = password
+ansible_password = Iskaldtja789
+ansible_winrm_server_cert_validation = ignore
+ansible_port = 5986
+# ansible_winrm_transport = ssl
+ansible_winrm_transport = ntlm
