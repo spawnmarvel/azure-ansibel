@@ -333,7 +333,8 @@ ansible-playbook add_content.yml
 
 ```
 
-## Ansible Execute a command in the remote shell, stdout goes to the specified file on the remote
+## Ansible Execute a command in the remote shell
+
 ansible.windows.win_shell module – Execute shell commands on target hosts
 
 https://docs.ansible.com/ansible/latest/collections/ansible/windows/win_shell_module.html#ansible-collections-ansible-windows-win-shell-module
