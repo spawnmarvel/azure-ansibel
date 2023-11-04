@@ -3,7 +3,9 @@
 Window remote management or in short WinRM is built-in windows protocol/Service which uses soap[simple object access protocol] to connect from another source system. Using WinRM, we can connect the remote system and execute any command there as its native user.
 
 
-## 1. Create azure VM
+## 1. Create azure VM in the portal
+
+We are simulating an existing vm not created by ansble.
 
 * vmukstest01
 * Standard B2s (2 vcpus, 4 GiB memory)
@@ -165,6 +167,69 @@ https://github.com/spawnmarvel/azure-ansible/blob/main/1-4-az-create-windows-vm/
 * Make ansible.cfg
 * Connect
 
+```bash
+mkdir manage-win
+cd manage-win
+sudo nano inventory
+cat inventory
+
+[winhosts]
+51.11.36.160
+
+[winhosts:vars]
+ansible_connection = winrm
+ansible_user = vossmann
+ansible_password = password
+ansible_winrm_server_cert_validation = ignore
+ansible_port = 5986
+# ansible_winrm_transport = ssl
+ansible_winrm_transport = ntlm
+
+sudo nano ansible.cfg
+cat ansible.cfg
+[defaults]
+INVENTORY=inventory
+
+ansible winhosts -m win_ping
+# 51.11.36.160 | UNREACHABLE! => {
+#    "changed": false,
+#    "msg": "ntlm: the specified credentials were rejected by the server",
+#    "unreachable": true
+# }
+
+# Now I used the wrong password, oink. Update inventory to correct password
+
+ansible winhosts -m win_ping
+# 51.11.36.160 | SUCCESS => {
+#     "changed": false,
+#    "ping": "pong"
+# }
+
+```
+
+## Ansible create diretory on windows
+
+Make create_dir.yml
+
+```yml
+---
+- name: win_file module make ansible folder
+  hosts: winhosts
+  vars:
+    mydir: 'C:\ansible'
+  tasks:
+    - name: Create a directory called ansible
+      ansible.windows.win_file:
+        path: "{{ mydir }}"
+        state: directory
+
+```
+
+run it
+
+```bash
+ansible create_dir.yml
+```
 
 ## Stop a service, bck and edit, then start
 
