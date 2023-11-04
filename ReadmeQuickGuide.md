@@ -10,6 +10,16 @@
 * Role: a collection of playbooks and other files that are relevant to a goal such as installing a web server.
 * Play: a full Ansible run. A play can have several playbooks and roles, included from a single playbook that acts as entry point.
 
+## Debug 
+
+```bash
+ansible-playbook add_content.yml  -vvvv
+
+# ERROR! couldn't resolve module/action 'ansible.windows.win_powershell'. This often indicates a misspelling, missing collection, or incorrect module path.
+
+# The error appears to be in '/home/imsdal/manage-win/add_content.yml': line 7, column 7, but may
+# be elsewhere in the file depending on the exact syntax problem.
+```
 
 ## Testing Connectivity to Nodes
 

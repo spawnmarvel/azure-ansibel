@@ -236,7 +236,7 @@ Make create_dir.yml
 run it
 
 ```bash
-ansible-playbook -i winhosts create_dir.yml
+ansible-playbook create_dir.yml
 
 # folder is created
 # https://follow-e-lo.com/2023/11/04/ansible-winrm-manage-vm/
@@ -244,7 +244,7 @@ ansible-playbook -i winhosts create_dir.yml
 ```
 ## Ansible create a file in directory on windows
 
-Make create_dir.yml
+Make create_file.yml
 
 ```yml
 ---
@@ -263,7 +263,7 @@ Make create_dir.yml
 run it
 
 ```bash
-ansible-playbook -i winhosts create_file.yml
+ansible-playbook create_file.yml
 
 # file is created
 # https://follow-e-lo.com/2023/11/04/ansible-winrm-manage-vm/
@@ -295,7 +295,38 @@ Make copy_file.yml
 run it
 
 ```bash
-ansible-playbook -i winhosts add_file.yml
+ansible-playbook copy_file.yml
+
+# file is created
+# https://follow-e-lo.com/2023/11/04/ansible-winrm-manage-vm/
+
+```
+
+## Ansible add content a file on windows
+ansible.windows.win_powershell module – Run PowerShell scripts
+
+https://docs.ansible.com/ansible/latest/collections/ansible/windows/win_powershell_module.html
+
+Make add_content.yml
+
+```yml
+---
+- name: win_copy module
+  hosts: winhosts
+  vars:
+     myfile: 'C:\ansible\ansible.log'
+  tasks:
+    - name: Run basic PowerShell script
+      ansible.windows.win_powershell:
+        script: |
+          Add-Content C:\ansible\ansible.log "Test"
+
+```
+
+run it
+
+```bash
+ansible-playbook add_content.yml
 
 # file is created
 # https://follow-e-lo.com/2023/11/04/ansible-winrm-manage-vm/
