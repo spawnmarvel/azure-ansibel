@@ -157,6 +157,14 @@ https://techdiksha.com/configuring-winrm-azure-virtual-machine/
 
 ## Test winrm with Ansible
 
+Continue from
+
+https://github.com/spawnmarvel/azure-ansible/blob/main/1-4-az-create-windows-vm/readme.md
+
+* Make inventory
+* Make ansible.cfg
+* Connect
+
 ## More info at wiki
 
 https://follow-e-lo.com/2023/11/04/configuring-winrm-with-https-in-azure-virtual-machine/
