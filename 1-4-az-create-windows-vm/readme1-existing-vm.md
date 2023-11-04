@@ -165,6 +165,17 @@ https://github.com/spawnmarvel/azure-ansible/blob/main/1-4-az-create-windows-vm/
 * Make ansible.cfg
 * Connect
 
+
+## Stop a service, bck and edit, then start
+
+* Install rabbitmq just an example
+* Add all config files
+* Use ansible to stop, backup file, edit file and start and verify
+
+## Copy files from a st account to windows
+
+## etc
+
 ## More info at wiki
 
 https://follow-e-lo.com/2023/11/04/configuring-winrm-with-https-in-azure-virtual-machine/
