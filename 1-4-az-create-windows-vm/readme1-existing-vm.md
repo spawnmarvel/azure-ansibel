@@ -132,7 +132,7 @@ We need to add Inbound rule for the HTTP and HTTPS port in the Azure portal for 
 ## 11. Verify HTTPS connection from source machine and execute command to remote maching.
 
 ```ps1
-$username = "vossmann"
+$username = ""
 
 $password = ""
 
