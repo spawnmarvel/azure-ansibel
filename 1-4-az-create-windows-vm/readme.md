@@ -406,16 +406,6 @@ https://learn.microsoft.com/en-us/azure/developer/ansible/vm-configure-windows?t
 
 https://follow-e-lo.com/2023/10/30/ansible-create-windows-vm/
 
-## Stop a service, bck and edit, then start
 
-* Install rabbitmq just an example
-* Add all config files
-* Use ansible to stop, backup file, edit file and start and verify
-
-## Connect to existing vm an configure winrm
-
-## Copy files from a st account to windows
-
-## etc
 
 
