@@ -221,7 +221,7 @@ Make create_dir.yml
 
 ```yml
 ---
-- name: win_file module make ansible folder
+- name: win_file module
   hosts: winhosts
   vars:
     mydir: 'C:\ansible'
@@ -248,7 +248,7 @@ Make create_dir.yml
 
 ```yml
 ---
-- name: win_file module make a file
+- name: win_file module
   hosts: winhosts
   vars:
      mydir: 'C:\ansible\ansible.log'
@@ -270,21 +270,25 @@ ansible-playbook -i winhosts create_file.yml
 
 ```
 
-## Ansible add content to a file in directory on windows
+## Ansible copy a file on windows
+ansible.windows.win_copy module – Copies files to remote locations on windows hosts
 
-Make add_file.yml
+https://docs.ansible.com/ansible/latest/collections/ansible/windows/win_copy_module.html
+
+Make copy_file.yml
 
 ```yml
 ---
-- name: win_file module make a file
+- name: win_copy module
   hosts: winhosts
   vars:
-     mydir: 'C:\ansible\ansible.log'
+     myfile: 'C:\ansible\ansible.log'
   tasks:
-    - name: Create a file called ansible.log
-      ansible.windows.win_file:
-        path: "{{ mydir }}"
-        state: touch
+    - name: Copy a single file
+      ansible.windows.win_copy:
+        src: "{{ myfile }}"
+        dest: "{{ myfile + '.bck' }}"
+        remote_src: true
 
 ```
 
