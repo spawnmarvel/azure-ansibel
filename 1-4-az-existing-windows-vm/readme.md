@@ -424,3 +424,6 @@ ansible-playbook stop_start_service.yml
 * Install rabbitmq just an example
 * Add all config files
 * Use ansible to stop, backup file, edit file and start and verify
+
+
+## Install RabbitMQ with Ansible
