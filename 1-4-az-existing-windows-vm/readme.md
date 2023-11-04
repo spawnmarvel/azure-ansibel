@@ -297,7 +297,7 @@ run it
 ```bash
 ansible-playbook copy_file.yml
 
-# file is created
+# file is created, bck file
 # https://follow-e-lo.com/2023/11/04/ansible-winrm-manage-vm/
 
 ```
@@ -333,7 +333,7 @@ ansible-playbook add_content.yml
 
 ```
 
-## Ansible Execute a command in the remote shell
+## Ansible Execute a command in the remote shell, iis
 
 ansible.windows.win_shell module – Execute shell commands on target hosts
 
@@ -372,7 +372,7 @@ ansible-playbook remote_script.yml
 
 ```
 
-## Ansible stop service
+## Ansible stop, log start service
 
 ansible.windows.win_service module – Manage and query Windows services
 
@@ -414,21 +414,13 @@ run it a few times
 ```bash
 ansible-playbook stop_start_service.yml
 
-# iis is installed
+# service stopped, logged, started and logged
 # https://follow-e-lo.com/2023/11/04/ansible-winrm-manage-vm/
 
 ```
 
-## Stop a service, bck and edit, then start
+## Install RabbitMQ manuall
 
 * Install rabbitmq just an example
 * Add all config files
 * Use ansible to stop, backup file, edit file and start and verify
-
-## Copy files from a st account to windows
-
-## etc
-
-## More info at wiki
-
-https://follow-e-lo.com/2023/11/04/configuring-winrm-with-https-in-azure-virtual-machine/
