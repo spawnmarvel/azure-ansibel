@@ -206,6 +206,7 @@ ansible winhosts -m win_ping
 # }
 
 ```
+# Ansible windows operations
 
 ## Ansible create diretory on windows
 
