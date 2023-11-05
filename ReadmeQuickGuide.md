@@ -92,7 +92,6 @@ Roles let you automatically load related vars, files, tasks, handlers, and other
 
 https://docs.ansible.com/ansible/latest/playbook_guide/playbooks_reuse_roles.html
 
-https://spacelift.io/blog/ansible-roles
 
 ## Debug 
 
