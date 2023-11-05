@@ -427,3 +427,6 @@ ansible-playbook stop_start_service.yml
 
 
 ## Install RabbitMQ with Ansible
+
+* This involves .exe
+* Environment vars and more fun

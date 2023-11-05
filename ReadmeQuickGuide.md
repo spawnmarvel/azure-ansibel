@@ -10,6 +10,55 @@
 * Role: a collection of playbooks and other files that are relevant to a goal such as installing a web server.
 * Play: a full Ansible run. A play can have several playbooks and roles, included from a single playbook that acts as entry point.
 
+
+## Inventory example
+
+Linux
+```yml
+inventory
+
+[servers]
+20.90.76.16
+
+ansible.cfg
+
+[defaults]
+INVENTORY = inventory
+private_key_file = /path/to/private/key
+ansible_user = username
+ansible_become = yes
+ansible_become_method = sudo
+ansible_python_interpreter = "/usr/bin/python3"
+
+```
+
+
+Windows
+
+```yml
+
+inventory
+
+[winhosts]
+51.11.36.160
+
+[winhosts:vars]
+ansible_connection = winrm
+ansible_user = username
+ansible_password = password
+ansible_winrm_server_cert_validation = ignore
+ansible_port = 5986
+# ansible_winrm_transport = ssl
+ansible_winrm_transport = ntlm
+
+ansible.cfg
+
+[defaults]
+INVENTORY=inventory
+
+```
+
+
 ## Debug 
 
 ```bash
