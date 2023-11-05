@@ -396,7 +396,7 @@ Make stop_starte_service.yml
          $state = Get-Service "W3SVC" | Select-Object -Property Status
          $log = "Ansible worker, Service state " + $state + " " + $d
          Add-Content C:\ansible\ansible.log $log
-    - name: Stop windows service IIS servicename or display name
+    - name: Star windows service IIS servicename or display name
       ansible.windows.win_service:
          name: W3SVC
          state: started
@@ -419,12 +419,89 @@ ansible-playbook stop_start_service.yml
 
 ```
 
-## Install RabbitMQ manuall
+## Manage RabbitMQ 1
 
-* Install rabbitmq just an example
-* Add all config files
-* Use ansible to stop, backup file, edit file and start and verify
+Install RabbitMQ manuall
 
+Continue, starts vms and ssh to ctrl node and test connectivity to server.
+
+Lest use what we know and try to make it better for each iteration.
+
+```bash
+cd manage-win
+
+ansible winhosts -m win_ping
+# "ping": "pong"
+
+```
+
+Install rabbitmq just an example
+
+Add all config files
+
+Use ansible to stop, backup file, edit file and start and verify
+
+Make the playbook
+* Stop service
+* Backup conf
+* Copy new conf
+* Start service
+* Verify service
+
+```bash
+mkdir rmq
+cp manage-win/inventory rmq/inventory
+cp manage-win/ansible.cfg rmq/ansible.cfg
+cd rmq
+
+ansible winhosts -m win_ping
+#  "ping": "pong"
+
+sudo nano update_rmq.yml
+
+sudo nano rabbitmq.conf
+# This is the main file on th ctrl node, we will edit it here and copy it
+
+```
+
+Make update_rmq.yml
+
+```yml
+---
+- name: Update Rabbitmq config
+  hosts: winhosts
+  vars:
+     myfile: 'c:\RabbitMqStore\rabbitmq.conf'
+     myservice: 'RabbitMQ'
+  tasks:
+    - name: Stop windows service RabbitMQ servicename or display name
+      ansible.windows.win_service:
+         name: RabbitMQ
+         state: stopped
+    - name: Log service state
+      ansible.windows.win_shell: |
+         $d = Get-Date
+         $state = Get-Service "RabbitMQ" | Select-Object -Property Status
+         $log = "Ansible worker, Service state {{ myservice }}" + $state + " " + $d
+         Add-Content C:\ansible\ansible.log $log
+    - name: Bakcup rabbitmq.conf
+      ansible.windows.win_copy:
+        src: "{{ myfile }}"
+        dest: "{{ myfile + '.bck' }}"
+        remote_src: true
+
+```
+
+Run it
+
+```bash
+
+ansible-playbook winhosts update_rmq.yml
+
+# service stopped, logged, started and logged
+# https://follow-e-lo.com/2023/11/04/ansible-winrm-manage-vm/
+
+```
 
 ## Install RabbitMQ with Ansible
 
