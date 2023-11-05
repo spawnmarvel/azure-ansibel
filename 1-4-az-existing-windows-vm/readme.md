@@ -550,7 +550,7 @@ Make update2_rmq.yml
          $state = Get-Service "RabbitMQ" | Select-Object -Property Status
          $log = "Ansible worker, Service state {{ rmqservice }}" + $state + " " + $d
          Add-Content C:\ansible\ansible.log $log
-    - name: Copy new {{ newfile }}
+    - name: Copy new {{ newfile }} and backup
       ansible.windows.win_copy:
         src: "{{ newfile }}"
         dest: "{{ rmqfile }}"
