@@ -471,8 +471,9 @@ Make update_rmq.yml
 - name: Update Rabbitmq config
   hosts: winhosts
   vars:
-     myfile: 'c:\RabbitMqStore\rabbitmq.conf'
-     myservice: 'RabbitMQ'
+     newfile: '/home/imsdal/rmq/rabbitmq.conf'
+     rmqfile: 'c:\RabbitMqStore\rabbitmq.conf'
+     rmqservice: 'RabbitMQ'
   tasks:
     - name: Stop windows service RabbitMQ servicename or display name
       ansible.windows.win_service:
@@ -482,13 +483,27 @@ Make update_rmq.yml
       ansible.windows.win_shell: |
          $d = Get-Date
          $state = Get-Service "RabbitMQ" | Select-Object -Property Status
-         $log = "Ansible worker, Service state {{ myservice }}" + $state + " " + $d
+         $log = "Ansible worker, Service state {{ rmqservice }}" + $state + " " + $d
          Add-Content C:\ansible\ansible.log $log
-    - name: Bakcup rabbitmq.conf
+    - name: Backcup rabbitmq.conf
       ansible.windows.win_copy:
-        src: "{{ myfile }}"
-        dest: "{{ myfile + '.bck' }}"
+        src: "{{ rmqfile }}"
+        dest: "{{ rmqfile + '.bck' }}"
         remote_src: true
+    - name: Copy new {{ newfile }}
+      ansible.windows.win_copy:
+        src: "{{ newfile }}"
+        dest: "{{ rmqfile }}"
+    - name: Start windows service RabbitMQ servicename or display name
+      ansible.windows.win_service:
+         name: RabbitMQ
+         state: started
+    - name: Log service state
+      ansible.windows.win_shell: |
+         $d = Get-Date
+         $state = Get-Service "RabbitMQ" | Select-Object -Property Status
+         $log = "Ansible worker, Service state {{ rmqservice }}" + $state + " " + $d
+         Add-Content C:\ansible\ansible.log $log
 
 ```
 
@@ -502,6 +517,66 @@ ansible-playbook winhosts update_rmq.yml
 # https://follow-e-lo.com/2023/11/04/ansible-winrm-manage-vm/
 
 ```
+
+
+## Manage RabbitMQ 2
+
+Lets do this more correct and learn, we have duplicates and we also need more error checking.
+
+backup: yes
+* backing up the original if it differs from the copied version
+* We changed the port to 5675
+https://docs.ansible.com/ansible/latest/collections/ansible/builtin/copy_module.html
+Make update2_rmq.yml
+
+```yml
+---
+- name: Update Rabbitmq config
+  hosts: winhosts
+  vars:
+     newfile: '/home/imsdal/rmq/rabbitmq.conf'
+     rmqfile: 'c:\RabbitMqStore\rabbitmq.conf'
+     rmqservice: 'RabbitMQ'
+  tasks:
+    - name: Stop windows service RabbitMQ servicename or display name
+      ansible.windows.win_service:
+         name: RabbitMQ
+         state: stopped
+    - name: Log service state
+      ansible.windows.win_shell: |
+         $d = Get-Date
+         $state = Get-Service "RabbitMQ" | Select-Object -Property Status
+         $log = "Ansible worker, Service state {{ rmqservice }}" + $state + " " + $d
+         Add-Content C:\ansible\ansible.log $log
+    - name: Copy new {{ newfile }}
+      ansible.windows.win_copy:
+        src: "{{ newfile }}"
+        dest: "{{ rmqfile }}"
+        backup: yes
+    - name: Start windows service RabbitMQ servicename or display name
+      ansible.windows.win_service:
+         name: RabbitMQ
+         state: started
+    - name: Log service state
+      ansible.windows.win_shell: |
+         $d = Get-Date
+         $state = Get-Service "RabbitMQ" | Select-Object -Property Status
+         $log = "Ansible worker, Service state {{ rmqservice }}" + $state + " " + $d
+         Add-Content C:\ansible\ansible.log $log
+
+```
+
+Run it
+
+```bash
+
+ansible-playbook winhosts update2_rmq.yml
+
+# service stopped, logged, started and logged
+# https://follow-e-lo.com/2023/11/04/ansible-winrm-manage-vm/
+
+```
+
 
 ## Install RabbitMQ with Ansible
 
