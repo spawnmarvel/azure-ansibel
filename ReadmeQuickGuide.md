@@ -31,6 +31,18 @@ ansible_become_method = sudo
 ansible_python_interpreter = "/usr/bin/python3"
 
 ```
+Ping it
+
+```bash
+ansible servers -m ping
+# 51.104.214.187 | SUCCESS => {
+#    "ansible_facts": {
+#        "discovered_interpreter_python": "/usr/bin/python3"
+#    },
+#    "changed": false,
+#    "ping": "pong"
+#}
+```
 
 
 Windows
@@ -57,7 +69,15 @@ ansible.cfg
 INVENTORY=inventory
 
 ```
+Ping
 
+```bash
+ansible winhosts -m win_ping
+# 51.11.36.160 | SUCCESS => {
+#     "changed": false,
+#    "ping": "pong"
+# }
+```
 
 ## Debug 
 
