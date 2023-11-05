@@ -11,6 +11,8 @@
 * Play: a full Ansible run. A play can have several playbooks and roles, included from a single playbook that acts as entry point.
 
 
+https://www.digitalocean.com/community/cheatsheets/how-to-use-ansible-cheat-sheet-guide
+
 ## Inventory example
 
 Linux
@@ -78,6 +80,14 @@ ansible winhosts -m win_ping
 #    "ping": "pong"
 # }
 ```
+
+## Playbook
+
+Are coverd in this repos in general
+
+## Roles
+
+https://spacelift.io/blog/ansible-roles
 
 ## Debug 
 
