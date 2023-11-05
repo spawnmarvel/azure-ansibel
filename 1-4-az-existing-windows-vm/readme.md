@@ -525,8 +525,10 @@ Lets do this more correct and learn, we have duplicates and we also need more er
 
 backup: yes
 * backing up the original if it differs from the copied version
-* We changed the port to 5675
+* We changed the port to 5675 and we removed the manual backup step
+
 https://docs.ansible.com/ansible/latest/collections/ansible/builtin/copy_module.html
+
 Make update2_rmq.yml
 
 ```yml
