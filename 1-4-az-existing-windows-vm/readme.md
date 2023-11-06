@@ -578,7 +578,8 @@ ansible-playbook winhosts update2_rmq.yml
 # https://follow-e-lo.com/2023/11/04/ansible-winrm-manage-vm/
 
 ```
-
+What more can we do, yes make a module of the duplicate tasks and call it.
+Must look into roles and include now...
 
 ## Install RabbitMQ with Ansible
 
