@@ -11,7 +11,13 @@
         dest: "{{ cp_path }}"
     - name: Install 7zip
       ansible.windows.win_package:
-        path: c:\ansible\7z2301-x64.exe
+        path:  c:\ansible\7z2301-x64.exe
         creates_path: C:\Program Files\7-Zip\7z2301-x64.exe
         arguments: /S
         state: present
+    - name: Get file info
+      ansible.windows.win_stat:
+        path: c:\Program Files\7zip
+      register: file_info
+    - debug:
+          msg: "{{ file_info }}"

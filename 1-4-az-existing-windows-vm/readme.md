@@ -633,12 +633,19 @@ https://www.zabbix.com/documentation/current/en/manual/installation/install_from
 ## Install 7 zip
 
 
+install silent
+
 https://docs.ansible.com/ansible/latest/collections/ansible/windows/win_package_module.html
 
-
-silent
+Silent
 
 https://stackoverflow.com/questions/46980762/ansible-playbook-running-for-longtime-indefinitely-for-exe-installation-task-us
+
+
+check folder
+
+https://docs.ansible.com/ansible/latest/collections/ansible/windows/win_stat_module.html
+
 
 ```bash
 
@@ -698,6 +705,6 @@ run it
 ``bash
 ansible-playbook install_7zip.yml
 # first copy the file
-# then install
+# then install 7 zip
 ```
 
