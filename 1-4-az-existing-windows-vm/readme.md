@@ -589,6 +589,11 @@ Must look into roles and include now...
 
 ## Install Zabbix agent with Ansible
 
+ansible.windows.win_package module – Installs/uninstalls an installable package
+
+https://docs.ansible.com/ansible/latest/collections/ansible/windows/win_package_module.html
+
+
 ```bash
 sudo mkdir install_zabbix_agent
 sudo cp manage-win/ansible.cfg install_zabbix_agent/ansible.cfg
@@ -598,7 +603,101 @@ cd install_zabbix_agent
 ansble winhosts -m win_ping
 # "ping": "pong"
 
-sudo cp /media/staccount04567/ansibleshare/zabbix_agent2-6.0.23-windows-amd64-openssl.msi zabbix_agent2-6.0.23-windows-amd64-openssl.msi
+sudo cp /media/staccount04567/ansibleshare/zabbix_agent2-6.0.23-windows-amd64-openssl.msi
 
 
-````
+```
+
+Example copy
+```yml
+---
+- name: win_copy module
+  hosts: winhosts
+  vars:
+     msi_path: '/home/imsdal/install_zabbix_agent/zabbix_agent2-6.0.23-windows-amd64-openssl.msi'
+     cp_path: 'C:\ansible\zabbix_agent2-6.0.23-windows-amd64-openssl.msi'
+  tasks:
+    - name: Copy a single file
+      ansible.windows.win_copy:
+        src: "{{ msi_path }}"
+        dest: "{{ cp_path }}"
+
+          
+```
+Zabbix docs
+
+https://www.zabbix.com/documentation/current/en/manual/installation/install_from_packages/win_msi
+
+
+
+## Install 7 zip
+
+
+https://docs.ansible.com/ansible/latest/collections/ansible/windows/win_package_module.html
+
+
+silent
+
+https://stackoverflow.com/questions/46980762/ansible-playbook-running-for-longtime-indefinitely-for-exe-installation-task-us
+
+```bash
+
+pwd
+/home/imsdal/install_7zip
+ls
+7z2301-x64.exe  ansible.cfg  install_7zip.yml  inventory
+
+
+```
+```yml
+---
+- name: win_copy module
+  hosts: winhosts
+  vars:
+     msi_path: '/home/imsdal/install_7zip/7z2301-x64.exe'
+     cp_path: 'C:\ansible\7z2301-x64.exe'
+  tasks:
+    - name: Copy a single file
+      ansible.windows.win_copy:
+        src: "{{ msi_path }}"
+        dest: "{{ cp_path }}"
+
+```
+
+run it
+
+```bash
+ansible-playbook install_7zip.yml
+# first copy the file
+
+```
+
+next 
+```yml
+---
+- name: win_copy module
+  hosts: winhosts
+  vars:
+     msi_path: '/home/imsdal/install_7zip/7z2301-x64.exe'
+     cp_path: 'C:\ansible\7z2301-x64.exe'
+  tasks:
+    - name: Copy a single file
+      ansible.windows.win_copy:
+        src: "{{ msi_path }}"
+        dest: "{{ cp_path }}"
+    - name: Install 7zip
+      ansible.windows.win_package:
+        path: c:\ansible\7z2301-x64.exe
+        creates_path: C:\Program Files\7-Zip\7z2301-x64.exe
+        arguments: /S
+        state: present
+
+```
+
+run it
+``bash
+ansible-playbook install_7zip.yml
+# first copy the file
+# then install
+```
+
