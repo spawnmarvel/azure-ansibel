@@ -1,0 +1,17 @@
+---
+- name: win_copy module
+  hosts: winhosts
+  vars:
+     msi_path: '/home/imsdal/install_7zip/7z2301-x64.exe'
+     cp_path: 'C:\ansible\7z2301-x64.exe'
+  tasks:
+    - name: Copy a single file
+      ansible.windows.win_copy:
+        src: "{{ msi_path }}"
+        dest: "{{ cp_path }}"
+    - name: Install 7zip
+      ansible.windows.win_package:
+        path: c:\ansible\7z2301-x64.exe
+        creates_path: C:\Program Files\7-Zip\7z2301-x64.exe
+        arguments: /S
+        state: present
