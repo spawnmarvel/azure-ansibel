@@ -585,3 +585,20 @@ Must look into roles and include now...
 
 * This involves .exe
 * Environment vars and more fun
+
+
+## Install Zabbix agent with Ansible
+
+```bash
+sudo mkdir install_zabbix_agent
+sudo cp manage-win/ansible.cfg install_zabbix_agent/ansible.cfg
+sudo cp manage-win/inventory install_zabbix_agent/inventory
+cd install_zabbix_agent
+
+ansble winhosts -m win_ping
+# "ping": "pong"
+
+sudo cp /media/staccount04567/ansibleshare/zabbix_agent2-6.0.23-windows-amd64-openssl.msi zabbix_agent2-6.0.23-windows-amd64-openssl.msi
+
+
+````
