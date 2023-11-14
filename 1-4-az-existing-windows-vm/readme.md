@@ -655,32 +655,8 @@ pwd
 ls
 7z2301-x64.exe  ansible.cfg  install_7zip.yml  inventory
 
-
-```
-```yml
----
-- name: win_copy module
-  hosts: winhosts
-  vars:
-     msi_path: '/home/imsdal/install_7zip/7z2301-x64.exe'
-     cp_path: 'C:\ansible\7z2301-x64.exe'
-  tasks:
-    - name: Copy a single file
-      ansible.windows.win_copy:
-        src: "{{ msi_path }}"
-        dest: "{{ cp_path }}"
-
 ```
 
-run it
-
-```bash
-ansible-playbook install_7zip.yml
-# first copy the file
-
-```
-
-next 
 ```yml
 ---
 - name: win_copy module
@@ -707,31 +683,21 @@ next
       register: file_info
     - debug:
           msg: "{{ file_info }}"
+    - debug:
+          msg: "{{ file_info.stat.exists }}"
+
 
 ```
 
 run it
-``bash
+
+```bash
 ansible-playbook install_7zip.yml
 # first copy the file
-# then install 7 zip
+# then install it
+# then check that the file folder exists
+
 ```
 
-add to play
-
-tasks:
-    - name: Command that generates output
-      cmd: date
-      register: output_date
-      when: ansible_facts['ansible_os_family'] == 'Debian'
-
-    - name: Print the stored output
-      echo: "The output of the command is: {{ output_date.stdout }}"
-
-    - name: Task to fail
-      fail:
-        msg: Task failed
 
 
-
-https://phoenixnap.com/kb/ansible-check-if-file-exists

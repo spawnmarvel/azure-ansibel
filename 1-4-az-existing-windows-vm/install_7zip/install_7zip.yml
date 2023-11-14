@@ -23,3 +23,5 @@
       register: file_info
     - debug:
           msg: "{{ file_info }}"
+    - debug:
+          msg: "{{ file_info.stat.exists }}"
