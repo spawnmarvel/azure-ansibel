@@ -649,6 +649,7 @@ https://docs.ansible.com/ansible/latest/collections/ansible/windows/win_stat_mod
 
 ```bash
 
+sudo mkdir install_7zip
 pwd
 /home/imsdal/install_7zip
 ls
@@ -684,9 +685,11 @@ next
 ---
 - name: win_copy module
   hosts: winhosts
+  gather_facts: yes
   vars:
      msi_path: '/home/imsdal/install_7zip/7z2301-x64.exe'
      cp_path: 'C:\ansible\7z2301-x64.exe'
+     install_path: 'C:\Program Files\7zip'
   tasks:
     - name: Copy a single file
       ansible.windows.win_copy:
@@ -698,6 +701,12 @@ next
         creates_path: C:\Program Files\7-Zip\7z2301-x64.exe
         arguments: /S
         state: present
+    - name: Get file info {{ install_path }}
+      ansible.windows.win_stat:
+        path: c:\Program Files\7-Zip
+      register: file_info
+    - debug:
+          msg: "{{ file_info }}"
 
 ```
 
@@ -708,3 +717,21 @@ ansible-playbook install_7zip.yml
 # then install 7 zip
 ```
 
+add to play
+
+tasks:
+    - name: Command that generates output
+      cmd: date
+      register: output_date
+      when: ansible_facts['ansible_os_family'] == 'Debian'
+
+    - name: Print the stored output
+      echo: "The output of the command is: {{ output_date.stdout }}"
+
+    - name: Task to fail
+      fail:
+        msg: Task failed
+
+
+
+https://phoenixnap.com/kb/ansible-check-if-file-exists
