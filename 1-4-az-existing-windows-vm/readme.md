@@ -633,11 +633,11 @@ https://www.zabbix.com/documentation/current/en/manual/installation/install_from
 ## Install 7 zip
 
 
-install silent
+install
 
 https://docs.ansible.com/ansible/latest/collections/ansible/windows/win_package_module.html
 
-Silent
+Silent is argument,  arguments: /S
 
 https://stackoverflow.com/questions/46980762/ansible-playbook-running-for-longtime-indefinitely-for-exe-installation-task-us
 
